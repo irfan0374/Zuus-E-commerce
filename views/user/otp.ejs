@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/user_asset/style.css">
+</head>
+
+<body>
+
+    <form action="/otp" method="post">
+        <div class="container height-100 d-flex justify-content-center align-items-center">
+            <div class="position-relative">
+                <div class="card p-2 text-center">
+                    <h6>Please enter the one time password <br> to verify your account</h6>
+                    <!-- <div> <span>A code has been sent to</span> <small>*******9897</small> </div> -->
+                    <div id="otp" class="mt-2">
+                        <input class="m-2 text-center form-control " type="text" id="otp" name="otp" />
+                       
+
+                    </div>
+                    <div class="mt-4"> <button class="btn btn-danger px-4 validate">Validate</button> </div>
+                    <div> <a rel="resend">resend</a> </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

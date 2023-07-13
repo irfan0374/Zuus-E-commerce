@@ -1,0 +1,100 @@
+<%- include('./layout/admin_header.ejs')%>
+<section class="content-main">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Products List</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+        <div>
+            <a href="#" class="btn btn-light rounded font-md">Export</a>
+            <a href="#" class="btn btn-light rounded font-md">Import</a>
+            <a href="/admin/addproduct" class="btn btn-primary btn-sm rounded">Create new</a>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <header class="card-header">
+            <div class="row align-items-center">
+                <div class="col col-check flex-grow-0">
+                    <div class="form-check ms-2">
+                        <input class="form-check-input" type="checkbox" value="" />
+                    </div>
+                </div>
+                 
+            </div>
+        </header>
+
+        <!-- card-header end// -->
+        <div class="card-body">
+            <article class="itemlist">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-sm-4 flex-grow-1 col-name">
+                        <h4 class="column-heading">Name</h4>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-price">
+                        <h4 class="column-heading">Price</h4>
+                    </div>
+                    <div class="col-lg-3 col-sm-2 col-4 col-date">
+                        <h4 class="column-heading">Stock</h4>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
+                        <h4 class="column-heading">Action</h4>
+                    </div>
+        
+                <% for (let i = 0; i < data.length; i++) { %>
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
+                        <a class="itemside" href="#">
+                            <div class="left">
+                                <img src="/admin_asset/imgs/<%=data[i].image[0]%>" class="img-sm img-thumbnail" alt="Item" />
+                            </div>
+                            <div class="info">
+                                <h6 class="mb-0"><%=data[i].name%></h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-price"><span>&#8377;<%=data[i].price%></span></div>
+        
+                    <div class="col-lg-1 col-sm-2 col-4 col-date">
+                        <span><%=data[i].stock%></span>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
+                        <a href="/admin/editproduct/?id=<%= data[i]._id %>" class="btn btn-sm font-sm rounded btn-brand">
+                            <i class="material-icons md-edit"></i> Edit
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-4 col-action text-end">
+                        <% if (data[i].is_block === false) { %>
+                        <a href="/admin/blockproduct/?id=<%=data[i]._id %>" class="btn btn-danger btn-sm">Block</a>
+                        <% } else { %>
+                        <a href="/admin/blockproduct/?id=<%=data[i]._id %>" class="btn btn-success btn-sm">Unblock</a>
+                        <% } %>
+                    </div>
+                </div>
+                <% } %>
+            </article>
+        </div>
+        
+             
+            <!-- itemlist  .// -->
+           
+              
+    <!-- card end// -->
+    <!-- PAGINATION -->
+    <!-- <div class="pagination-area mt-30 mb-50">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-start">
+                <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                <li class="page-item"><a class="page-link" href="#">02</a></li>
+                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="#">16</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section> -->
+<!-- content-main end// -->
+
+<%- include('./layout/admin_footer.ejs')%>

@@ -1,0 +1,176 @@
+<%-include('../admin/layout/admin_header.ejs')%>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Products</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
+        <style>
+            html * {
+                box-sizing: border-box;
+            }
+
+            p {
+                margin: 0;
+            }
+
+            .upload__box {
+                padding: 40px;
+            }
+
+            .upload__inputfile {
+                width: 0.1px;
+                height: 0.1px;
+                opacity: 0;
+                overflow: hidden;
+                position: absolute;
+                z-index: -1;
+            }
+
+            .upload__btn {
+                display: inline-block;
+                font-weight: 600;
+                color: #c1e4e9;
+                text-align: center;
+                min-width: 116px;
+                padding: 5px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                border: 2px solid;
+                background-color: #1a1c23;
+                border-color: #454674;
+                border-radius: 10px;
+                line-height: 18px;
+                font-size: 14px;
+            }
+
+            .upload__btn:hover {
+                background-color: unset;
+                color: #4045ba;
+                transition: all 0.3s ease;
+            }
+
+            .upload__btn-box {
+                margin-bottom: 10px;
+            }
+
+            .upload__img-wrap {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0 -10px;
+            }
+
+            .upload__img-box {
+                width: 150px;
+                padding: 0 10px;
+                margin-bottom: 12px;
+            }
+
+            .upload__img-close {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background-color: rgba(0, 0, 0, 0.5);
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                text-align: center;
+                line-height: 24px;
+                z-index: 1;
+                cursor: pointer;
+            }
+
+            .upload__img-close:after {
+                content: "\2716";
+                font-size: 14px;
+                color: white;
+            }
+
+            .img-bg {
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                position: relative;
+                padding-bottom: 100%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main class="h-full pb-16 overflow-y-auto">
+            <div class="container px-6 mx-auto">
+                <h2 class="my-6 text-2xl font-semibold text-gray-700">
+                    Add Products
+                </h2>
+
+                <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md">
+                    <form action="/admin/addproduct" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input required class="form-control" type="text" name="name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            <input class="form-control" type="number" name="price">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Upload Image</label>
+                            <input type="file" accept="image/*" name="image" class="form-control" multiple>
+                          </div>
+                          
+                          <label class="block mt-4 text-sm">
+                            <span class="text-gray-700 dark:text-gray-400"> category </span>
+                            
+                            <select  name="category"
+                              class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                            > 
+                
+                     
+                              <%
+                               if(Catdata.length>0){
+                              for(let i=0;i<Catdata.length;i++){
+                                %>
+                              <option><%= Catdata[i].name%></option>
+                            <%
+                          }
+                        }else{
+                          %>
+                         
+                          <option>No Category Availiable</option>
+                          <%
+                        }
+                        %>
+                
+                      </select>
+                          </label>
+                
+
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="description" class="form-control" rows="3"
+                                placeholder="Enter some long form content."></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Stock</label>
+                            <input class="form-control" type="text" name="stock">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add New Products</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+    </html>
+
+
+    <%-include('../admin/layout/admin_footer.ejs')%>

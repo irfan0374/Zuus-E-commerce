@@ -1,0 +1,110 @@
+<%- include('./layout/admin_header.ejs')%>
+            <section class="content-main">
+                <div class="content-header">
+                    <div>
+                        <h2 class="content-title card-title">Categories</h2>
+                        <p>Add, edit or delete a category</p>
+                    </div>
+                    <div>
+                      
+                        <div class="container">
+                            <a href="/admin/addcategory" class="btn btn-success rounded-pill">Add category</a>
+                          </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- <div class="col-md-3">
+                                <form>
+                                    <div class="mb-4">
+                                        <label for="product_name" class="form-label">Name</label>
+                                        <input type="text" placeholder="Type here" class="form-control" id="product_name" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="product_slug" class="form-label">Slug</label>
+                                        <input type="text" placeholder="Type here" class="form-control" id="product_slug" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Parent</label>
+                                        <select class="form-select">
+                                            <option>Fruit</option>
+                                            <option>Snack</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Description</label>
+                                        <textarea placeholder="Type here" class="form-control"></textarea>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary">Create category</button>
+                                    </div>
+                                </form>
+                            </div> -->
+                            <div class="col-md-9">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th class="px-4 py-3">Category</th>
+
+                                                <th class="px-4 py-3">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                            <% if(catlist.length>0){
+                                                for(let i=0;i<catlist.length;i++){%>
+                                                    <tr class="text-gray-700 dark:text-gray-400">
+                                                        <td class="px-4 py-3">
+                                                          <div class="flex items-center text-sm">
+                                                                <p class="font-semibold"><%=catlist[i].name %></p>
+                                                          </td>
+                                                                </div>
+                                                              
+                                                            
+                                                <td>  
+                                                    <% if (catlist[i].is_block===false){ %>
+                                                        <a href="/admin/catblock/?id=<%=catlist[i]._id %>" class="btn btn-danger btn-sm">Block</a>
+                                                       <% }else{ %>
+                                                        <a href="/admin/catblock/?id=<%=catlist[i]._id %>" class="btn btn-success btn-sm">Unblock</a>
+                                                            <% } %>
+                                                            <a href="/admin/catedit/<%=catlist[i]._id %>" class="btn btn-success btn-sm">Edit</a>
+
+                                                  </td>
+                                            </tr>
+                                            <% } }else{ %>
+                                                <tr>
+                                                  <h1 style="color: red;">List is Empty... </h1>
+                                                </tr>
+                                                <% } %>   
+                                                <td>
+                                                    
+                                                </td>                                     
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- .col// -->
+                        </div>
+                        <!-- .row // -->
+                    </div>
+                    <!-- card body .// -->
+                </div>
+                <!-- card .// -->
+            </section>
+            <!-- content-main end// -->
+            <footer class="main-footer font-xs">
+                <div class="row pb-30 pt-15">
+                    <div class="col-sm-6">
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        &copy; Nest - HTML Ecommerce Template .
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end">All rights reserved</div>
+                    </div>
+                </div>
+            </footer>
+            <%- include('./layout/admin_footer.ejs')%>
