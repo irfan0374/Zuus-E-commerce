@@ -1,0 +1,53 @@
+<%- include('./layouts/header.ejs')%>
+
+<br><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-wallet mr-2"></i> My Wallet</h5>
+                    <p class="card-text">Your wallet balance: <span class="font-weight-bold">₹<%=wallet.wallet%></span></p>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <h5>Wallet History</h5>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% wallet.walletHistory.forEach((data)=>{%>
+                    <tr>
+                        <td><%= new Date(data.date).toLocaleDateString() %></td>
+                        <td><%=data.description%></td>
+                        <td class="<%= data.amount >= 0 ? 'text-success' : 'text-danger' %>">
+                            ₹<%=data.amount%>
+                            <i class="fas <%= data.amount >= 0 ? 'fa-arrow-up' : 'fa-arrow-down' %> ml-1"></i>
+                        </td>
+                    </tr>
+                    <%})%>
+                    <!-- Add more rows for wallet history -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Your JavaScript code here
+</script>
+
+<%- include('./layouts/footer.ejs')%>

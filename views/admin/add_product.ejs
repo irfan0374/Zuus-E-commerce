@@ -1,14 +1,5 @@
 <%-include('../admin/layout/admin_header.ejs')%>
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Add Products</title>
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
-        <style>
+ <style>
             html * {
                 box-sizing: border-box;
             }
@@ -107,16 +98,17 @@
                 </h2>
 
                 <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md">
-                    <form action="/admin/addproduct" method="post" enctype="multipart/form-data">
+                    <form action="/admin/addproduct" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input required class="form-control" type="text" name="name">
+                            <input class="form-control" type="text" id="name" name="name" required >
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Price</label>
-                            <input class="form-control" type="number" name="price">
-                        </div>
+                        
+                 <div class="mb-3">
+                     <label class="form-label">Price</label>
+                     <input id="price" class="form-control" type="number" name="price" min="0 " required>
+                                </div>
 
                         <div class="mb-3">
                             <label class="form-label">Upload Image</label>
@@ -158,19 +150,70 @@
 
                         <div class="mb-3">
                             <label class="form-label">Stock</label>
-                            <input class="form-control" type="text" name="stock">
+                            <input class="form-control" type="text" name="stock" id="stock" min="1"  required>
                         </div>
                         <button type="submit" class="btn btn-primary">Add New Products</button>
                     </form>
                 </div>
             </div>
-        </main>
+        
+            <!-- Success Modal -->
+            <div class="modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="successModalLabel">Success</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Product added successfully!
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+      
+<%-include('../admin/layout/admin_footer.ejs')%>
+    
+    <script>
+function validateForm() {
+    
+    const name=document.getElementById('name')
+    const priceinput = document.getElementById('price');
+    const price = parseFloat(priceinput.value);
+    if(name==''){
+        alert("Enter The Name")
+        return false
+    }
 
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
-    </body>
+    if (isNaN(price) || price < 100) {
+        
+        alert("Price must be a number and should be at least 100.");
+        
+        return false;
+    }
+    
+    const stockinput = document.getElementById('stock');
+    const stock = parseFloat(stockinput.value);
 
-    </html>
+    if(isNaN(stock)||stock < 1){
+        alert('stock must be greaterthan 0');
+
+        return false;
+    }
+
+    
+    showSuccessModal();
+    return true;
+}
+function showSuccessModal() {
+   let modal=document.getElementById('successModal')
+   modal.removeAttribute("hidden")  
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+    successModal.show();
+}
+
+</script>
 
 
-    <%-include('../admin/layout/admin_footer.ejs')%>
+   

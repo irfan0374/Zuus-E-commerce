@@ -7,6 +7,7 @@ const session=require("express-session")
 const dotenv=require('dotenv').config()
 
 const app=express();
+const cartCount=require('./middleware/cartcount')
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
   next();
@@ -14,11 +15,11 @@ app.use((req, res, next) => {
 app.use( express.json())
 app.use( express.urlencoded({extended : false}))
 app.use(session({
-    secret: "secret", 
+    secret: process.env.secret, 
     resave: false,              
     saveUninitialized: false,   
   }));
-
+app.use(cartCount.cartcount)
 
 app.set('view engine','ejs');
 app.use(express.static('public'))
@@ -29,6 +30,14 @@ app.use('/',userroute)
 
 const adminroute=require('./route/adminroute')
 app.use('/admin',adminroute)
+
+app.use((req,res)=>{
+  try{
+    res.redirect('/error')
+  }catch(error){
+    console.log(error.message)
+  }
+})
 
 
 app.listen(4000 , () => {

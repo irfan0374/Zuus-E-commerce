@@ -1,91 +1,94 @@
-<%-include('./layout/admin_header.ejs')%>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-  }
+<%-include('. /layout/admin_header.ejs')%>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
 
-  .container {
-    margin-top: 5%;
-    width: 60%;
-    align-self: center;
-  }
+    .container {
+      margin-top: 5%;
+      width: 60%;
+      align-self: center;
+    }
 
-  .form-container {
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+    .form-container {
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-  h4 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #555;
-  }
+    h4 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #555;
+    }
 
-  .form-input {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 100%;
-    font-size: 14px;
-    color: #333;
-    transition: border-color 0.3s ease-in-out;
-  }
+    .form-input {
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 100%;
+      font-size: 14px;
+      color: #333;
+      transition: border-color 0.3s ease-in-out;
+    }
 
-  .form-input:focus {
-    outline: none;
-    border-color: #8b5cf6;
-    box-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
-  }
+    .form-input:focus {
+      outline: none;
+      border-color: #8b5cf6;
+      box-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
+    }
 
-  .error-message {
-    color: #f60000;
-    text-align: center;
-  }
+    .error-message {
+      color: #f60000;
+      text-align: center;
+    }
 
-  .btn-add {
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #42c45f;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease-in-out;
-    cursor: pointer;
-  }
+    .btn-add {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #42c45f;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in-out;
+      cursor: pointer;
+    }
 
-  .btn-add:hover {
-    background-color: #36a752;
-  }
-</style>
-</head>
-<body>
-<div class="container">
-  <div class="form-container">
-    <h4>Add Category</h4>
-    <form action="" method="post">
-      <div class="form-group">
-        <label for="fname">Category Name</label>
-        <input type="text" name="name" id="fname" class="form-input" required />
-        <% if (typeof message !== 'undefined') { %>
-          <span class="error-message"><%= message %></span>
-        <% } %>
+    .btn-add:hover {
+      background-color: #36a752;
+    }
+  </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <h4>Add Category</h4>
+        <form action="" method="post">
+          <div class="form-group">
+            <label for="fname">Category Name</label>
+            <input type="text" name="name" id="fname" class="form-input" required />
+            <% if (typeof message !=='undefined' ) { %>
+              <span class="error-message">
+                <%= message %>
+              </span>
+              <% } %>
+          </div>
+          <button type="submit" class="btn btn-add">Add</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-add">Add</button>
-    </form>
-  </div>
-</div>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
   <script>
     const name = document.getElementById("fname");
-  
+
     name.addEventListener("input", () => {
       if (name.value.trim().length == "") {
         nmae.setCustomValidity("This Field Canot be Null");
@@ -94,9 +97,9 @@
       }
     });
   </script>
-  
 
 
 
 
-<%- include('./layout/admin_footer.ejs')%>
+
+  <%- include('./layout/admin_footer.ejs')%>

@@ -1,207 +1,380 @@
-<!DOCTYPE html>
-<html lang="zxx" class="no-js">
+<%- include('./layouts/header.ejs')%>
+  <style>
+    /* Style the anchor tag */
+    a.text-decoration-none {
+      color: black;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
 
-<head>
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Favicon-->
-	<link rel="shortcut icon" href="i">
-	<!-- Author Meta -->
-	<meta name="author" content="CodePixar">
-	<!-- Meta Description -->
-	<meta name="description" content="">
-	<!-- Meta Keyword -->
-	<meta name="keywords" content="">
-	<!-- meta character set -->
-	<meta charset="UTF-8">
-	<!-- Site Title -->
-	<title>Panda</title>
-	<!--
-		CSS
-		============================================= -->
-	<link rel="stylesheet" href="/css/linearicons.css">
-	<link rel="stylesheet" href="/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/themify-icons.css">
-	<link rel="stylesheet" href="/css/bootstrap.css">
-	<link rel="stylesheet" href="/css/owl.carousel.css">
-	<link rel="stylesheet" href="/css/nice-select.css">
-	<link rel="stylesheet" href="/css/nouislider.min.css">
-	<link rel="stylesheet" href="/css/ion.rangeSlider.css">
-	<link rel="stylesheet" href="/css/ion.rangeSlider.skinFlat.css">
-	<link rel="stylesheet" href="/css/magnific-popup.css">
-	<link rel="stylesheet" href="/css/main.css">
-</head>
+    /* Add hover effect */
+    a.text-decoration-none:hover {
+      color: #23527c;
+    }
 
-<body>
+    .product_cartitem_pic img {
+      height: 50px;
+      width: 50px;
+    }
 
-	<!-- Start Header Area -->
-	<header class="header_area sticky-header">
-		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light main_box">
-				<div class="container">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.html"><img src="img/images.png" alt="not found"></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
-							<li class="nav-item submenu dropdown">
-								<a href="/product" class="nav-link dropdown-toggle">Shop</a>
-							</li>
-							
-							<li class="nav-item submenu dropdown">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Order</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="/userprofile">profile</a></li>
-									<li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
-									<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
-								</ul>
-							</li>
-							<%if(user){%>
-								<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-							<%}else{%>
-								<li class="nav-item"><a class="nav-link" href="/signin">Sign in</a></li>
-							<%}	%>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
-							<li class="nav-item">
-								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-		<div class="search_input" id="search_input_box">
-			<div class="container">
-				<form class="d-flex justify-content-between">
-					<input type="text" class="form-control" id="search_input" placeholder="Search Here">
-					<button type="submit" class="btn"></button>
-					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
-				</form>
-			</div>
-		</div>
-	</header>
-	<!-- End Header Area -->
-	<br><br>
-	<br><br>
-	<br><br>
+    .product_cartitem_text h6,
+    .product_cartitem_text h5 {
+      font-size: 14px;
+    }
 
-	<div class="colorlib-loader"></div>
+    .breadcrumb-option {
+      background-color: #f8f9fa;
+      padding: 20px 0;
+    }
 
-	<div id="page">
+    .breadcrumb__text h4 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
 
-		<nav class="colorlib-nav" role="navigation">
-			<!-- Navigation Code -->
-		</nav>
+    .breadcrumb__links a {
+      color: #333;
+    }
 
-		<div class="breadcrumbs">
-			<!-- Breadcrumbs Code -->
-		</div>
+    .breadcrumb__links span {
+      color: #777;
+    }
 
-		<div id="colorlib-contact">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-3">
-						<!-- Sidebar -->
-						<div class="sidebar">
-							<nav class="sidebar-nav">
-								<ul class="nav">
-									<li class="nav-item">
-										<a class="nav-link" href="#">Address</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#">Settings</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#">Privacy</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#">Security</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-					<div class="col-md-9">
-						<div id="colorlib-contact">
-							<div class="container">
-								<div class="row">
+    .card {
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
 
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="contact-wrap">
-											<h3>Personal Information</h3>
-											<form action="/userprofile?id=<%=userdata._id%>" method='post'class="contact-form">
-												<div class="row">
-													<div class="col-md-6">
-														<div class="form-group">
-															<label for="fname">Name</label>
-															<input type="text" id="fname" name="name" value='<%=userdata.name%>' class=form-control>
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="form-group">
-															<label for="lname">Phone</label>
-															<input type="number" id="lname"name='phone'value='<%=userdata.phone%>'class="form-control" placeholder="">
-														</div>
-													</div>
-													<div class="w-100"></div>
-													<div class="col-sm-12">
-														<div class="form-group">
-															<label for="email">Email</label>
-															<input type="text" id="email" name='email'disabled value="<%=userdata.email%>"class="form-control" placeholder="">
-														</div>
-													</div>
-													<div class="w-100"></div>
-													
-				
-													</div>
-													<div class="w-100"></div>
-													
-													<div class="w-100"></div>
-													<div class="col-sm-12">
-														<div class="form-group">
-															<input type="submit" value="Edit details" class="btn btn-primary">
-														</div>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div id="map" class="colorlib-map"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+    .card:hover {
+      transform: scale(1.02);
+    }
 
-		<!-- Rest of the Code -->
+    .card-body {
+      padding: 20px;
+    }
 
-	</div>
+    .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
 
-	<!-- JavaScript Imports -->
-	<script src="/js/jquery-3.2.1.min.js"></script>
-	<script src="/js/popper.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
-	<script src="/js/jquery.nice-select.min.js"></script>
-	<script src="/js/jquery.nouislider.min.js"></script>
-	<script src="/js/jquery.magnific-popup.min.js"></script>
-	<script src="/js/main.js"></script>
-</body>
+    .card-title::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background-color: #ff6600;
+      margin-top: 10px;
+    }
 
-</html>
+    .row {
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+
+    .col-lg-4,
+    .col-lg-8 {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .mb-3 {
+      margin-bottom: 20px;
+    }
+
+    .list-group-item {
+      padding: 20px;
+      border: none;
+    }
+
+    .list-group-item:first-child {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .list-group-item:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    .btn-primary {
+      background-color: #ff6600;
+      border-color: #ff6600;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #cc5500;
+      border-color: #cc5500;
+    }
+
+    .card-body p {
+      color: black;
+    }
+
+    .card-body p.mb-0 {
+      color: #777;
+    }
+  </style>
+  <title>User Dashboard</title>
+  </head>
+
+  <body>
+
+    <!-- Main Content -->
+    <section class="breadcrumb-option">
+      
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="breadcrumb__text">
+                <h4><i class="fas fa-user-circle"></i> Profile</h4>
+                <div class="breadcrumb__links">
+                  <a href="/">Home</a>
+                  <span>Profile</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <section style="background-color: white">
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h5 class="my-3">
+                  <%=userdata.name%>
+                </h5>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <a href="#" class="text-decoration-none" onclick="toggleProfileForm()"><i class="fas fa-edit"></i>
+                      Edit Profile</a>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/orderList" class="text-decoration-none"> Orders</a>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="#" class="text-decoration-none" onclick="toggleAddress()"><i
+                        class="fas fa-map-marked-alt"></i> Manage Address</a>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/loadWallet" class="text-decoration-none">Wallet History</a>
+                  </li>
+                  <li class="list-group-item">
+                    <a href="/logout" class="btn btn-primary ml-3"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="card mb-4" id="userDetails">
+              <div class="card-body">
+                <h3 class="card-title">User Profile</h3>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Full Name:</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="mb-0">
+                      <%=userdata.name %>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Email:</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="mb-0">
+                      <%=userdata.email%>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Mobile:</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="mb-0">
+                      <%=userdata.phone%>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0 mt-2">Actions:</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <a href="/changePassword?id=<%=userdata._id%>" class="btn btn-primary mr-2"><i
+                        class="fas fa-key"></i> Change Password</a>
+                    <a href="/add_address" class="btn btn-primary"><i class="fas fa-plus"></i> Add Address</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+
+
+
+
+            <div class="card mb-4" id="profileForm" style="display: none">
+              <div class="card-body">
+                <h5 class="card-title">Update Profile</h5>
+                <hr />
+                <form action="/userprofile/?id=<%=userdata._id%>" method="post">
+                  <div class="form-group">
+                    <label for="Name"><i class="fas fa-user"></i> First Name</label>
+                    <input type="text" class="form-control" name="name" id="  name" value="<%=userdata.name%>"
+                      placeholder="Enter your first name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" class="form-control" id="email" name="email" readonly
+                      value="<%=userdata.email%>" placeholder="Enter your email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="mobile"><i class="fas fa-mobile-alt"></i> Mobile</label>
+                    <input type="text" class="form-control" id="mobile" name="phone" value="<%=userdata.phone%>"
+                      placeholder="Enter your mobile number" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="card mb-4" id="addressDetails" style="display: none">
+              <div class="card-body">
+
+                <h5 class="card-title">Address Details</h5>
+                <div class="d-flex justify-content-end">
+                  <a href="/add_address/?id=<%=userdata._id%>" class="btn btn-primary btn-sm"><i
+                      class="fas fa-plus"></i> Add New Address</a>
+                </div>
+                <hr />
+                <% if(addressData){ %>
+                  <div class="row">
+
+                    <%addressData.address.forEach((data,index)=>{%>
+                      <div class="col-sm-3">
+
+                        <p class="mb-0">Address<%=index+1%>:</p>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="text-muted mb-0">
+                          <%=data.fname%>
+                            <%=data.lname%>
+                        </p>
+                        <p class="text-muted mb-0">
+                          <%=data.address%>
+                        </p>
+                        <p class="text-muted mb-0">
+                          <%=data.pin%>
+                        </p>
+                        <p class="text-muted mb-0">
+                          <%=data.phone%>
+                        </p>
+                      </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-sm-9 offset-sm-3">
+                      <a href="/editAddress?id=<%=data._id%>" class="btn btn-primary btn-sm mr-2"><i
+                          class="fas fa-edit"></i> Edit</a>
+                      <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Remove</a>
+                    </div>
+                    <%})%>
+                  </div>
+                  <hr />
+                  <%} else { %>
+                    <p>No Address found</p>
+                    <% } %>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- JavaScript dependencies (jQuery, Popper.js, Bootstrap JS) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+    <script>
+      function toggleProfileForm() {
+       
+        var profileForm = document.getElementById("profileForm");
+        var userDetails = document.getElementById("userDetails");
+        var addressDetails = document.getElementById("addressDetails");
+
+        if (profileForm.style.display === "none") {
+          profileForm.style.display = "block";
+          userDetails.style.display = "none";
+          addressDetails.style.display = "none";
+          orderDetails.style.display = "none";
+        } else {
+          profileForm.style.display = "none";
+          userDetails.style.display = "block";
+        }
+      }
+
+      function toggleAddress() {
+
+        var userDetails = document.getElementById("userDetails");
+        var addressDetails = document.getElementById("addressDetails");
+        var profileForm = document.getElementById("profileForm");
+        if (addressDetails.style.display === "none") {
+          addressDetails.style.display = "block";
+          userDetails.style.display = "none";
+          profileForm.style.display = "none";
+          orderDetails.style.display = "none";
+        } else {
+          addressDetails.style.display = "none";
+          userDetails.style.display = "block";
+        }
+      }
+
+      function toggleOrders() {
+
+        var userDetails = document.getElementById("userDetails");
+        var addressDetails = document.getElementById("addressDetails");
+        var profileForm = document.getElementById("profileForm");
+        if (orderDetails.style.display === "none") {
+          orderDetails.style.display = "block";
+          userDetails.style.display = "none";
+          profileForm.style.display = "none";
+          addressDetails.style.display = "none";
+        } else {
+          addressDetails.style.display = "none";
+          userDetails.style.display = "block";
+        }
+      }
+
+    
+
+
+    </script>
+
+
+  </body>
+
+  </html>

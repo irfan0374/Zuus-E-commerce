@@ -1,0 +1,70 @@
+<%- include('./layout/admin_header.ejs') %>
+    <div class="container my-5">
+
+        <h2 class="mb-4">Coupons List</h2>
+        <table class="table">
+            <thead>
+                <%if(coupons !==0 ){%>
+                    <tr>
+                        <th>Code</th>
+                        <th>Discount Percentage</th>
+                        <th>Min Cart Amount</th>
+                        <th>Start Date</th>
+                        <th>Expiry Date</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    <%}else{%>
+                        <div class="container">
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-md-6">
+                                    <div class="alert alert-danger text-center" role="alert">
+                                        <strong class="d-block">Coupon is empty</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%}%>
+            </thead>
+            <tbody>
+                <% coupons.forEach(coupon=> { %>
+                    <tr>
+                        <td>
+                            <%= coupon.code %>
+                        </td>
+                        <td>
+                            <%= coupon.dicountType %>%
+                        </td>
+                        <td>₹<%= coupon.minCartAmt %>
+                        </td>
+                        <td>
+                            <%= new Date(coupon.startDate).toLocaleDateString('en-US', { year: 'numeric' ,
+                                month: 'short' , day: '2-digit' }).replace(/\//g, '-' ) %>
+                        </td>
+                        <td>
+                            <%= new Date(coupon.expiredDate).toLocaleDateString('en-US', { year: 'numeric' ,
+                                month: 'short' , day: '2-digit' }).replace(/\//g, '-' ) %>
+                        </td>
+
+                        <td class="text-center">
+                            <a href="/admin/editCoupon?id=<%= coupon._id %>" class="btn btn-primary btn-sm"><i
+                                class="fas fa-edit"></i> Edit</a>
+                                </td>
+
+                                <td>
+                                <% if (coupon.status ===true){%>
+                            <a href="/admin/deletecoupon?id=<%= coupon._id %>" class="btn btn-danger btn-sm"><i
+                                    class="fas fa-trash"></i> Unlist</a>
+                                    <%}else{%>
+                                        <a href="/admin/deletecoupon/?id=<%= coupon._id %>" class="btn btn-success btn-sm"><i
+                                            class="fas fa-trash"></i> list</a>
+                                            <%}%>
+                        </td>
+                    </tr>
+
+
+                    <% }) %>
+
+            </tbody>
+        </table>
+    </div>
+    <%- include('./layout/admin_footer.ejs') %>

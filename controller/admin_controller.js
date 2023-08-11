@@ -1,7 +1,8 @@
-const admin = require("../modle/admin_model");
-const productdb = require("../modle/product_model");
-const User = require('../modle/user_model');
-const catdb = require('../modle/category_model')
+const admin = require("../model/admin_model");
+const productdb = require("../model/product_model");
+const User = require('../model/user_model');
+const catdb = require('../model/category_model')
+const orderdb = require('../model/orderModel')
 const bcrypt = require('bcrypt');
 
 // adminlogin
@@ -13,6 +14,7 @@ const adminlogin = async (req, res) => {
     }
 
 }
+
 const adminverify = async (req, res) => {
     try {
 
@@ -23,6 +25,7 @@ const adminverify = async (req, res) => {
             const mpassword = await bcrypt.compare(password, Userdata.password);
             if (mpassword) {
                 if (Userdata.is_admin === 1) {
+                    req.session.adminId=email
                     res.redirect('/admin/dashboard')
                 } else {
                     res.render('login', { message: "username or password is incorrect" })
@@ -114,18 +117,18 @@ const insert_category = async (req, res) => {
 //category
 const catedit = async (req, res) => {
     try {
-        const id=req.params.id
-        const editdata=await catdb.findById({_id:id});
+        const id = req.params.id
+        const editdata = await catdb.findById({ _id: id });
 
-        res.render('catedit',{data:editdata})
+        res.render('catedit', { data: editdata })
     } catch (error) {
         console.log(error.message)
     }
 }
 
 
-const catEditPost=async(req,res)=>{
-    try{
+const catEditPost = async (req, res) => {
+    try {
         const name = req.body.name;
         const id = req.body.id;
 
@@ -138,13 +141,13 @@ const catEditPost=async(req,res)=>{
             if (already) {
                 res.render('catedit', { message: 'This category is already taken' })
             } else {
-                       
-        const data=await catdb.findByIdAndUpdate({_id:id},{$set:{name:name}})
-        res.redirect('/admin/category')
+
+                const data = await catdb.findByIdAndUpdate({ _id: id }, { $set: { name: name } })
+                res.redirect('/admin/category')
             }
         }
 
-    }catch(error){
+    } catch (error) {
         console.log(error.message)
     }
 
@@ -165,6 +168,50 @@ const catblock = async (req, res) => {
         console.log(error.message);
     }
 }
+const orderlist = async (req, res) => {
+    try {
+
+
+        const orderData = await orderdb.find().populate('products.productId')
+        res.render('orderlist', { order: orderData })
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+const orderDetail = async (req, res) => {
+    try {
+        const user = req.query.id
+        const order = await orderdb.findOne({ _id: user }).populate("products.productId")
+        res.render('orderDetails', { order, user })
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+const orderUpdate = async (req, res) => {
+    try {
+
+        const orderId = req.body.orderid
+
+        const productId = req.body.proid
+
+        const status = req.body.status
+   
+        const orderdata = await orderdb.findOneAndUpdate({ _id: orderId, 'products._id': productId },
+             {
+                $set: {
+                    status: status
+
+                }
+            })
+            
+            res.redirect(`/admin/order_details?id=${orderId}`);
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
 
 
@@ -180,7 +227,10 @@ module.exports = {
     catedit,
     catEditPost,
     insert_category,
-    catblock
+    catblock,
+    orderlist,
+    orderDetail,
+    orderUpdate
 
 }
 

@@ -29,7 +29,24 @@ const userschema = mongoose.Schema({
    is_admin: {
       type: Number,
       default: 0
-   }
+   },
+   wallet:{
+      type:Number,
+      defalut:0
+   },
+   walletHistory: [
+      {
+        date: {
+          type: Date,
+        },
+        amount: {
+          type: Number,
+        },
+        description: {
+          type: String,
+        },
+      },
+    ],
 
 })
 

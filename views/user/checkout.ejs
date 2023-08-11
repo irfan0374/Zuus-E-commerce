@@ -1,0 +1,558 @@
+<%- include('./layouts/header.ejs')%>
+<style>
+  
+/* Additional styles for the coupon message */
+.coupon-message {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Additional styles for the delete button */
+.coupon-delete {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
+   .checkout-box {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Styles for the address section */
+  .address-form {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .radio-label input[type="radio"] {
+    margin-right: 10px;
+  }
+
+  .address-label {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  /* Styles for the payment section */
+  .payment-form {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+  }
+
+  .payment-option {
+    margin-bottom: 10px;
+  }
+
+  .checkout-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  /* Style the "Place Order" button */
+  .checkout-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+    .checkout-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Add space for ordered products */
+    .ordered-products {
+        margin-bottom: 40px;
+        background-color: #f8f8f8;
+        padding: 30px;
+    }
+
+    .ordered-product {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .ordered-product-image {
+        width: 80px;
+        height: 80px;
+        margin-right: 20px;
+    }
+
+    .ordered-product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .ordered-product-details {
+        flex-grow: 1;
+    }
+
+    .ordered-product-name {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .ordered-product-price {
+        font-size: 14px;
+        color: #888;
+    }
+
+    /* Address and Payment Form */
+    .checkout-box {
+        display: flex;
+    }
+
+    .address-form {
+        flex: 1;
+        margin-right: 20px;
+        border: 1px solid #eaeaea;
+        padding: 15px;
+    }
+
+    .payment-form {
+        flex: 1;
+        border: 1px solid #eaeaea;
+        padding: 15px;
+    }
+
+    /* Custom radio button styles */
+    .radio-label {
+        cursor: pointer;
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 10px;
+        display: inline-block;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .radio-label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .radio-checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #fff;
+        border: 2px solid #f76b1c;
+        border-radius: 50%;
+    }
+
+    .radio-label input:checked ~ .radio-checkmark:after {
+        display: block;
+    }
+
+    .radio-label .radio-checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 4px;
+        left: 4px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #f76b1c;
+    }
+
+    /* Radio button for payment options */
+    .payment-option {
+        display: flex;
+        align-items: center;
+    }
+
+    .payment-option input[type="radio"] {
+        margin-right: 10px;
+    }
+
+</style>
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <!-- Breadcrumb content goes here -->
+</section>
+<!-- End Banner Area -->
+
+<!--================Checkout Area =================-->
+<div id="reloadDiv">
+<section class="cart_area">
+    <div class="container">
+        <div class="ordered-products">
+            <h3 class="ordered-products-heading">Ordered Products</h3>
+            <% if (cart && cart.product) { %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                           
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% cart.product.forEach((cart) => { %>
+                            <tr>
+                                <td>
+                                    <div class="ordered-product">
+                                        <div class="ordered-product-image">
+                                            <img src="/admin_asset/imgs/<%= cart.productId.image[0] %>"
+                                                alt="<%= cart.productId.name %>">
+                                        </div>
+                                        <div class="ordered-product-details">
+                                            <div class="ordered-product-name">
+                                                <%= cart.productId.name %>
+                                            </div>
+                                            <div class="ordered-product-price">
+                                                ₹ <%= cart.productId.price %>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5><%= cart.quantity %></h5>
+                                </td>
+                               
+                                <td>
+                                    <h5><%= cart.total %></h5>
+                                </td>
+                            </tr>
+                        <% }) %>
+                        <tr >
+                            <td colspan="3" class="text-right"><strong>Subtotal:</strong></td>
+                            <td ><strong id="subtotalRow" ><%= total %></strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p>No products in cart</p>
+            <% } %>
+        </div>
+    </div>
+    <div class="container mt-5">
+      <div class="input-group" id="replace">
+        
+          <input type="text" class="form-control rounded-pill border-primary" name="code"  id="code" placeholder="Coupon code:" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+              <button class="btn btn-primary rounded-pill" onclick="applyCoupon('<%= total %>')" type="button">Apply </button>
+              <button class="btn btn-secondary rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Available for you</button>            </div>
+      </div>
+    
+      
+  </div>
+  <br><br>
+    <form action="" id="place-order">
+        <div class="checkout-box">
+          <!-- Address Section -->
+          <div class="address-form checkout-form">
+            <h3 class="text-center mb-4">Select Address</h3>
+            <% if (addressData) {
+            addressData.address.forEach((data) => { %>
+              <div class="form-group">
+                <label class="radio-label">
+                  <input type="radio" name="addressOption" value="<%=data.fname%> <%=data.lname%>, <%=data.address%>, <%=data.pin%>, <%=data.phone%>" checked>
+                  <span class="address-label">Use Existing Address:</span>
+                  <%=data.fname%> <%=data.lname%>, <%=data.address%>, <%=data.pin%>, <%=data.phone%>
+                  <span class="radio-checkmark"></span>
+                </label>
+              </div>
+            <% }) } else { %>
+              <div class="no-address text-center">
+                <strong>NO address</strong>
+              </div>
+            <% } %>
+          </div>
+      
+          <!-- Payment Method Section -->
+          <div class="payment-form checkout-form">
+            <h3 class="text-center mb-4">Select Payment Method</h3>
+            <div class="payment-option">
+              <input type="radio" name="payment" value="cod" id="cod" checked>
+              <label for="cod">Cash on Delivery (COD)</label>
+            </div>
+            <div class="payment-option">
+              <input type="radio" name="payment" value="razorpay" id="razorpay">
+              <label for="razorpay">Razorpay</label>
+            </div>
+            <button class="btn btn-primary mt-4 checkout-btn" type="submit">
+              <i class="fa fa-shopping-cart mr-2"></i>Place Order
+            </button>
+          </div>
+        </div>
+      </form>
+<div class="text-center mt-3">
+    <a href="/add_address1" class="btn btn-primary">Add Address</a>
+</div>
+<!-- modal for list coupon -->
+
+<!-- Modal with Coupon -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Your Coupon Code</h5>
+           <button type="button"  class="btn-close" data-bs-dismiss="modal"></button>
+            
+        </div>
+        <% coupon.forEach((coupon) => { %>
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="coupon p-3 text-center bg-warning">
+                    <div class="coupon-title font-weight-bold">
+                      <%= coupon.dicountType %>%OFF
+                    </div>
+                    <div class="coupon-code bg-white rounded p-2">
+                      <%= coupon.code %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                  <button class="btn btn-primary btn-block copy-coupon" data-coupon-code="<%= coupon.code %>">Copy Coupon</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+        
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+</section>
+<script> 
+   const copyButton = document.querySelectorAll('.copy-coupon');
+    copyButton.forEach((button) => {
+        button.addEventListener('click', () => {
+            const couponCode = button.getAttribute('data-coupon-code');
+            copyToClipboard(couponCode);
+            alert('Coupon code copied to clipboard: ' + couponCode);
+        });
+    });
+
+      function copyToClipboard(text) {
+        if (!navigator.clipboard) {
+            // Clipboard API not supported, fallback to document.execCommand
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        } else {
+            // Use Clipboard API for modern browsers
+            navigator.clipboard.writeText(text);
+        }
+    }
+
+
+
+
+
+ $("#place-order").submit((e) => {
+    const allTotals = document.getElementById("subtotalRow").innerHTML
+    const allTotal = parseInt(allTotals)
+    const address = $("input[name=addressOption]:checked").val()
+    const paymentMethod = $("input[name=payment]:checked").val();
+    console.log(address);
+    e.preventDefault()
+    console.log("object");
+    $.ajax({
+      url: "/checkoutload",
+      method: 'post',
+      data: {
+        total : allTotal,
+        address: address,
+        payment: paymentMethod,
+     
+      },
+      success: (response) => {
+        if (response.codSuccess == true) {
+          const param=response.params
+          const url='/order-placed?'+param
+          window.location.href=url
+        }
+        else if (response.codFailed == true) {
+          swal("Oops!", "Add Address", "error");
+        }
+        else {
+          
+          razorPayPayment(response.order)
+        }
+      }
+    })
+  })
+
+  function razorPayPayment(order) {
+            var options = {
+                "key": "rzp_test_LUK6qKTry34nlK", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "zuus company", //your business name
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                // "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+                "handler": function (response) {
+                    verifyPayment(response,order)
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar", //your customer's name
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9000090000"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+        function verifyPayment(payment,order) {
+
+            alert("Order Successfull")  
+       
+            $.ajax({
+                url: "/verifypayment",
+                method: 'post',
+                data: {
+                    payment,
+                    order
+                },
+                success: (response) => {
+                    if (response.success == true) {
+                        const param = response.params
+                        const url = '/order-placed/'+param
+                        window.location = "/order-placed";
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Payment has failed',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                }
+            })
+        }
+        function applyCoupon(total) {
+    const code = document.getElementById('code');
+    const couponcode = code.value.trim();
+    const incvalue = total;
+
+    if (couponcode !== "") {
+        $.ajax({
+            url: '/applycoupon',
+            method: 'post',
+            data: {
+                code: couponcode,
+                total: total
+            },
+            success: (response) => {
+               // Replace input field with the success message and delete option
+          const couponDiv = document.createElement("div");
+          couponDiv.classList.add("input-group", "mb-3", "coupon-div");
+          couponDiv.innerHTML = `
+          <div class="input-group-append coupon-div">
+    <span class="input-group-text coupon-message bg-success text-white">Coupon applied successfully!</span>
+    <button class="btn btn-danger coupon-delete" type="button">Delete</button>
+</div>
+          `;
+          replace.replaceWith(couponDiv);
+
+          // Add event listener to the "Delete" button
+          const deleteButton = couponDiv.querySelector(".coupon-delete");
+          deleteButton.addEventListener("click", () => {
+            $('#reloadDiv').load('/checkoutload #reloadDiv')
+          });
+          
+
+          // Display succ
+                if (response.alreadyused === true) {
+                    Swal.fire({
+                        title: 'Oops..',
+                        text: 'Cannot use coupon anymore',
+                        icon: 'error',
+                        timer: 1500
+                    });
+                }
+                if (response.success === true) {
+                    document.getElementById('subtotalRow').innerHTML=response.amount
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Coupon applied',
+                        icon: 'success',
+                        timer: 1500
+                        
+                    });
+                    
+
+
+                   
+                }
+            }
+        });
+    }
+}
+const copyButtons = document.querySelectorAll(".copy-button");
+
+function copyCouponCode() {
+  const couponCode = event.target.dataset.coupon;
+  const dummyElement = document.createElement("textarea");
+  document.body.appendChild(dummyElement);
+  dummyElement.value = couponCode;
+  dummyElement.select();
+  document.execCommand("copy");
+  document.body.removeChild(dummyElement);
+  alert("Coupon code copied to clipboard: " + couponCode);
+}
+
+copyButtons.forEach((button) => {
+  button.addEventListener("click", copyCouponCode);
+});
+      </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+<%- include('./layouts/footer.ejs')%>

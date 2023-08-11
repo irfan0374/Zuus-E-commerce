@@ -22,7 +22,7 @@
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
                 <div class="signup-content">
-                    <form action="/signup" method="POST"  id="signup-form" class="signup-form">
+                    <form action="/signup" method="POST"  id="signup-form" class="signup-form" onsubmit="return validateForm()">
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
                             <input type="text" class="form-input" name="name" id="name" placeholder="Your Name"/>
@@ -61,6 +61,52 @@
         </section>
 
     </div>
+<!-- ... (previous JS and closing tags) ... -->
+<script>
+    function validateForm() {
+        var name = document.getElementById("name").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var phone = document.getElementById("phone").value.trim();
+        var password = document.getElementById("password").value.trim();
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var passwordStrengthRegex = /^.{8,}$/; // Password must be at least 8 characters long
+
+        if (name === "") {
+            alert("Please enter your name.");
+            return false;
+        }
+
+        if (email === "") {
+            alert("Please enter your email.");
+            return false;
+        } else if (!email.match(emailRegex)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        if (phone === "") {
+            alert("Please enter your phone number.");
+            return false;
+        }
+
+        if (password === "") {
+            alert("Please enter a password.");
+            return false;
+        }
+
+        // Password length validation
+        if (!passwordStrengthRegex.test(password)) {
+            alert("Password must be at least 8 characters long.");
+            return false;
+        }
+
+        // Add more custom validation rules if needed
+
+        return true; // Submit the form if all validations pass
+    }
+</script>
+</body>
+</html>
 
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

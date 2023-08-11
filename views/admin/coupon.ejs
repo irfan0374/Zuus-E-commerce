@@ -1,0 +1,144 @@
+
+    <%- include('./layout/admin_header.ejs') %>
+    <style>
+        .form-group label {
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">Add Coupon</h2>
+                    </div>
+                    <div class="card-body">
+                       
+                     <div id="errorContainer" class="alert alert-danger" style="display: none;"></div> <!-- Error container -->
+                        <form  id="couponform" class="forms-sample"  action="/admin/loadCoupon" method="POST" >
+                            <div class="form-group">
+                                <label for="couponCode">Coupon Code</label>
+                                <input type="text" class="form-control" id="couponCode" name="code" placeholder="Enter coupon code" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="DiscountAmount">Discount Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="DiscountAmount" name="DiscountAmount" min="0" placeholder="Enter discount value" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MinCartAmount">Min Cart Amount</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="MinCartAmount" name="MinCartAmount" min="0" placeholder="Enter discount value" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="date" class="form-control" id="expiryDate" name="expiryDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" class="form-control" id="description" name="description" placeholder="Enter the Description" required>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">Create Coupon</button>
+                                <a href="/admin/coupons" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <script>
+
+    // validation form
+
+        
+        const couponForm=document.getElementById('couponform')
+     
+        couponForm.addEventListener('submit', (event) => {
+           
+
+        const errorContainer=document.getElementById('errorContainer')
+        const name=document.getElementById('couponCode').value.trim()
+        const discountpercentage=document.getElementById('DiscountAmount').value.trim()
+        const MinCartAmount=parseFloat(document.getElementById('MinCartAmount').value.trim())
+        const startingDate=document.getElementById('startDate').value.trim()
+        const expiryDate=document.getElementById('expiryDate').value.trim()
+        const description=document.getElementById('description').value.trim()
+        const startDateObj = new Date(startingDate);
+        startDateObj.setHours(0, 0, 0, 0);
+        const expiryDateObj = new Date(expiryDate);  
+
+        errorContainer.innerHTML=""
+        errorContainer.style.display='none'
+        const date=new Date();
+        date.setHours(0, 0, 0, 0);
+      
+       
+
+        if(!name||!discountpercentage||!MinCartAmount||!startingDate||!expiryDate||!description){
+            console.log('1')
+            event.preventDefault()
+            errorContainer.innerHTML="All field should be filled"
+            errorContainer.style.display='block'    
+        }
+        if(name.length < 5){
+            console.log('2')
+            event.preventDefault()
+            errorContainer.innerHTML="Name should contain atleast 4 letter"
+            errorContainer.style.display='block'
+
+        }
+        const pattern = /^[a-zA-Z0-9]+$/
+        if(!pattern.test(name)){
+            console.log('3')
+            event.preventDefault()
+            errorContainer.innerHTML="Name should not contain space or symbols"
+            errorContainer.style.display='block'
+        }
+        if(startDateObj < date || expiryDateObj < startDateObj){
+            console.log('4')
+            console.log(`currrentdate:${startDateObj}`)
+            console.log(`today:${date}`)
+            event.preventDefault()
+            errorContainer.innerHTML="invalid date"
+            errorContainer.style.display='block'
+        }
+        if(MinCartAmount<99){
+            console.log('5')
+            event.preventDefault()
+            errorContainer.innerHTML='Minmum cart amount must greater than 99'
+            errorContainer.style.display='block'
+            
+        }
+        if((discountpercentage>100||discountpercentage<0)){
+            console.log('6')
+            event.preventDefault()
+            errorContainer.innerHTML="percentage cannot be greater than 100 or less than zero"
+            errorContainer.style.display='block'
+            
+        }
+        console.log('suucessfull')
+
+    })
+        
+    
+
+    
+ </script>
+    <%- include('./layout/admin_footer.ejs') %>
+

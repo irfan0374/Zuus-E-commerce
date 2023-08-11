@@ -1,0 +1,292 @@
+
+<%- include('./layouts/header.ejs')%>
+<style>
+    
+    
+    .media {
+        display: flex;
+        align-items: center;
+    }
+
+    .media-body {
+        margin-left: 20px;
+    }
+
+    .media img {
+        max-width: 100px; 
+        height: auto;
+    }
+    .empty_cart_message {
+            font-size: 24px;
+            color: #555;
+    }
+    .quantity {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+        margin: 10px;
+    }
+
+    .pro-qty-2 {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .qty-btn {
+        background-color: #f1f1f1;
+        border: none;
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 8px 12px;
+        transition: background-color 0.3s;
+    }
+
+    .qty-btn:hover {
+        background-color: #ddd;
+    }
+
+    input[type="text"] {
+        border: none;
+        text-align: center;
+        font-size: 16px;
+        width: 40px;
+        padding: 8px 0;
+    }
+    .cart_area {
+        padding: 50px 0;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .cart_inner .table-responsive {
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .cart_inner .table thead th {
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #333;
+        background-color: #f8f8f8;
+        border-bottom: 2px solid #e6e6e6;
+    }
+
+    .cart_inner .table tbody td {
+        vertical-align: middle;
+    }
+
+    .cart_inner .table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .cart_inner .product-remove {
+        text-align: center;
+    }
+
+    .cart_inner .product-remove .btn {
+        padding: 6px 12px;
+    }
+
+    .checkout_btn_inner {
+        justify-content: flex-end;
+    }
+
+    .empty_cart_message {
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+        color: #555;
+    }
+    .cart_inner .table tbody td.subtotal-label,
+.cart_inner .table tbody td.subtotal-value {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.cart_inner .table tbody td.subtotal-label {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+</style>
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Shopping Cart</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="category.html">Cart</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Cart Area =================-->
+    <div id="reloadDiv">
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <% if(cart&&cart.product&&cart.product.length>0){%>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                       
+                         <% cart.product.forEach((item)=>{ %>
+                           
+                           
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="/admin_asset/imgs/<%=item.productId.image[0]%>" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <p><%=item.productId.name%></p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5><%=item.productId.price%></h5>
+                                </td>
+                                <td class="quantity__item">
+                                    <div class="quantity">
+                                        <div class="pro-qty-2">
+                                            <button class="qty-btn" type="button" onclick="increaseQuantity('<%= item._id %>', '<%= item.productId._id %>', -1)">-</button>
+                                            <input type="text" value="<%= item.quantity %>" readonly>
+                                            <button type="button" class="qty-btn" onclick="increaseQuantity('<%= item._id %>', '<%= item.productId._id %>', 1)">+</button>
+                                        </div>
+                                    </div>
+                                </td> 
+                                <td>
+                                    <h5><%=item.total%></h5>
+                                </td>
+                                <td class="product-remove">
+                                    <!-- Use the "btn" and "btn-danger" classes for a red delete button -->
+                                    <button id="delete" onclick="deleteCart('<%= item.productId._id%>')" class="btn btn-danger">
+                                        <span class="ion-ios-close"></span> Delete
+                                    </button>
+                                </td>
+                                </tr>
+                            
+                            <%})%> <%}else{%>
+                                <div class="empty_cart_message">
+                                    <p>No products in cart</p>
+                                </div>
+                           <%}%>
+                        <tr>
+                           
+                           <% if(cart&&cart.product&&cart.product.length>0){%>
+                              
+                            <td colspan="3"></td> <!-- Add an empty cell to span across the first three columns -->
+                            <td class="subtotal-label">
+                                <h5>Subtotal</h5>
+                            </td>
+                            <td class="subtotal-value">
+                                <h5><%= total %></h5>
+                            </td>
+                        </tr>
+                               
+                            </tr>
+                            <% } %>
+                           
+                              
+                            <tr class="out_button_area">
+                                <td>
+
+                              
+
+                                </td>
+                                <% if(cart&&cart.product&&cart.product.length>0){%>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn" href="#">Continue Shopping</a>
+                                        <a class="primary-btn" href="/checkoutload">Proceed to checkout</a>
+                                    </div>
+                                </td>
+                                <%}%>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+  </div>
+    <!--================End Cart Area =================-->
+        <script>
+            function deleteCart(id){
+                $.ajax({
+                    url:'/deleteCart',
+                    method:'post',
+                    data:{
+                        id:id
+                    }
+                }).done((data)=>{
+                    console.log(data);
+                    if(data.success==true){
+                        window.location.reload()
+                    }
+                })   
+            }
+        </script>
+
+
+    <script>
+        function increaseQuantity(cartId,productId,count){
+            $.ajax({
+                url:'/incrementqnty',
+                method:'post',
+                data:{
+                    cartId,
+                    productId,
+                    count
+                },
+                success:(response)=>{
+                    if(response.success){
+                        $('#reloadDiv').load('/cartload #reloadDiv')
+                    }else{
+                        swal.fire({
+                            title:'error',
+                            icon:"error",
+                            text:response.message,
+                            timer:2000
+                        })
+                    }
+
+                },
+                error:(error)=>{
+                    swal.fire({
+                        title:"error",
+                        icon:'error',
+                        text:response.message,
+                        timer:1500
+
+                    })
+                }
+            })
+        }
+    </script>
+  
+    <%- include('./layouts/footer.ejs')%>

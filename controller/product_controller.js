@@ -1,7 +1,6 @@
-const User = require('../modle/user_model');
-const product = require('../modle/product_model');
-const catdb = require('../modle/category_model')
-const productdb = require('../modle/product_model')
+const User = require('../model/user_model');
+const catdb = require('../model/category_model')
+const productdb = require('../model/product_model')
 
 
 const productlist = async (req, res) => {
@@ -23,7 +22,7 @@ const add_product = async (req, res) => {
         console.log(error.message);
     }
 };
-const insertproduct = async (req, res) => {
+const  insertproduct = async (req, res) => {
     try {
         const arrimage = []
         if (req.files && req.files.length) {
@@ -31,7 +30,7 @@ const insertproduct = async (req, res) => {
                 arrimage.push(req.files[i].filename);
             }
         }
-
+ 
         const data = new productdb({
             name: req.body.name,
             price: req.body.price,
@@ -132,9 +131,9 @@ const productDetails = async (req, res) => {
         const id = req.query.id
         const user = req.session.userId
         const productData = await productdb.findById({ _id: id, user })
-        console.log(productData,'thsi is product data')
+       
 
-        res.render('singleproduct', { proData: productData, user })
+        res.render('singleproduct', { proData:productData, user })
 
     } catch (error) {
         console.log(error.message);
@@ -142,13 +141,48 @@ const productDetails = async (req, res) => {
 }
 const productload = async (req, res) => {
     try {
-        const user = req.session.userId
-        const productData = await productdb.find({ is_block: false })
-        res.render('product', { productData, user })
+        let category=req.query.category||"All"
+
+        let categoryData=await catdb.find({is_block:false},{name:1,_id:0})
+        let catData=[]
+        for( i=0;i<categoryData.length;i++){
+            catData[i]=categoryData[i].name
+        }
+         
+        
+        category=="All"?category=[...catData]:category=req.query.category.split(',')
+    const user = req.session.userId;
+      var search = '';
+      if (req.query.search) {
+        search = req.query.search;
+      }
+      var page = 1;
+      if (req.query.page ) {
+        page = req.query.page;
+      }
+      const limit=6
+      
+  
+      const productData = await productdb.find({
+        is_block: false,
+        $or: [{ name: { $regex: new RegExp(search, 'i') },category:{$in:category} }]
+      }).limit(limit *1)
+      .skip((page-1)*limit)
+     .exec();
+
+     
+      const count = await productdb.find({
+        is_block: false,
+        $or: [{ name: { $regex: new RegExp(search, 'i') } }]
+      }).countDocuments()
+      
+
+
+      res.render('product', { productData, user ,category:categoryData,totalpage:Math.ceil(count/limit)});
     } catch (error) {
-        console.log(error.message)
+      console.log(error.message);
     }
-}
+  };
 
 
 module.exports = {

@@ -1,0 +1,116 @@
+<%- include('./layouts/header.ejs') %>
+<br>
+<br>
+<br>
+<br>
+<div id="reloadDiv">
+<div class="card" >
+  <div class="card-body">
+    <h5 class="card-title">Order Details</h5>
+
+    <% if (order.length) { %>
+      <% order.forEach((cart) => { %>
+        <div class="card mb-3" id="orderDetails" style="width: 50%; margin: auto;">
+            <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% cart.products.forEach((item) => { %>
+                    <tr class="cart-item">
+                      <td class="product__cart__item">
+                        <div class="d-flex align-items-center">
+                          <img src="/admin_asset/imgs/<%= item.productId.image[0] %>" alt=""
+                            class="product__cart__item__pic" style="height: 70px; width: 70px;">
+                          <div class="product__cart__item__text ml-3">
+                            <h6 class="font-weight-bold mb-1"><%= item.productId.name %></h6>
+                            <h5 class="text-primary">₹<%= item.productId.price %></h5>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="quantity__item">
+                        <div class="quantity">
+                          <div class="pro-qty-2">
+                           <p><%= item.quantity %></p>
+                             
+                          </div>
+                        </div>
+                      </td>
+                      <td class="cart__price text-success font-weight-bold">
+                        ₹<%= item.total %>
+                        <input type="hidden" id="total" name="total" value="<%= cart.totalAmount %>">
+                      </td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="text-center mt-3">
+              <a class="btn btn-primary btn-sm view-details-btn"
+                href="/orderDetails?id=<%= cart._id %>">View Details</a>
+              <% if (cart.status === "Cancelled") { %>
+                <div class="alert alert-danger mt-2" role="alert">
+                  <strong>Your order has been successfully cancelled.</strong>
+                </div>
+              <% } else { %>
+                <a class="btn btn-danger btn-sm delete-btn"
+                  onclick="cancelorder('<%= cart._id %>','<%= cart.totalAmount %>')">Cancel</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <br><br>
+      <% }); %>
+    <% } else { %>
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">Order is empty</p>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+</div>
+
+
+
+<script>
+      //orderCancel
+      function cancelorder(orderId, total) {
+
+$.ajax({
+  url: '/cancelOrder',
+  method: 'post',
+  data: { orderId, total },
+
+  success: (response) => {
+    if (response.success) {
+      $('#reloadDiv').load('/orderList #reloadDiv')
+      Swal.fire({
+        title: "order cancelled",
+        icon: 'success',
+        timer: 1500
+      })
+    } else {
+      Swal.fire({
+        title: "Oops",
+        icon: 'error',
+        timer: 1500
+
+      })
+    }
+  },
+  error: (err) => {
+    console.log(err)
+  }
+})
+
+}
+</script>
