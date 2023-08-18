@@ -53,7 +53,7 @@ const listCoupon=async(req,res)=>{
 // user
 const applycoupon = async (req, res) => {
     try {
-        console.log("coupon")
+        
         const code = req.body.code;
        
         let amount = req.body.total;
@@ -63,7 +63,6 @@ const applycoupon = async (req, res) => {
             const coupondata = await coupondb.findOne({ code: code });
             if (coupondata) {
                 if (coupondata.minCartAmt <= amount) {
-                    // await coupondb.findOneAndUpdate({ _id: coupondata._id }, { $push: { used: userData._id } });
                     const discountTotal = (amount / 100) * coupondata.dicountType;
                     amount=amount-discountTotal
                     const {userId}=req.session

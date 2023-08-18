@@ -1,6 +1,8 @@
 const isLogin = async (req,res,next) =>{
     try {
+        console.log("GHF");
         if(req.session.adminId){
+            console.log(3487928934);
             next()
         }else{
             res.redirect('/admin')

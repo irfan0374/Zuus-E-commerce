@@ -1,5 +1,8 @@
 const mongoose=require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
+// mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
+mongoose.connect("mongodb+srv://zuus:xOocmS8ag8Qevvjf@cluster0.czkonjb.mongodb.net/e-commerce").then((data) => console.log("Connected MongoDb")).catch((err) => console.log(err))
+
+
 
 
 const express = require( 'express')

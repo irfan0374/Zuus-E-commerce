@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer");
 const productdb = require('../model/product_model')
 const addressDb = require('../model/address_model')
 const orderDB = require('../model/orderModel')
+const bannerDb = require('../model/banner_model')
 require('dotenv').config();
 
 let otp;
@@ -202,7 +203,7 @@ const signupverify = async (req, res) => {
 const logout = async (req, res) => {
     try {
         req.session.destroy()
-        res.redirect('/login')
+        res.redirect('/admin/login')
     } catch (error) {
         res.redirect("/error");
         console.log(error.message);
@@ -211,8 +212,12 @@ const logout = async (req, res) => {
 // homeload
 const homeload = async (req, res) => {
     try {
+       
         const user = req.session.userId
-        res.render('home', { user })
+        const product= await productdb.find().sort({createdAt:-1}).limit(8)
+        const banner=await bannerDb.findOne({unlist:false})
+        res.render('home', { user,product,banner })
+
     } catch (error) {
         res.redirect("/error");
         console.log(error.message);
@@ -328,7 +333,7 @@ const editAddress = async (req, res) => {
     try {
         const { userId } = req.session
         const { fname, email, phone, address, state, pin } = req.body
-        console.log(address)
+      
 
         const data = await addressDb.updateOne({ user_id: userId }, {
             $set: {
@@ -361,7 +366,7 @@ const changePassword = async (req, res) => {
 }
 const passwordChange = async (req, res) => {
     try {
-        console.log("1");
+       
         const id = req.session.userId
         const userData = await User.findById({ _id: id })
         const password = req.body.CurrentPassword
@@ -384,13 +389,13 @@ const passwordChange = async (req, res) => {
 }
 const orderDetails=async(req,res)=>{
     try{
-        console.log("enter")
+   
         const user=req.session.userId
         const {id}=req.query
-        console.log(id,"iddd")
+     
 
         const order = await orderDB.findById({_id:id}).populate('products.productId');
-        console.log('kkeeee')
+      
         res.render('order_details',{order,user})
     }catch(error){
         console.log(error.message)
@@ -398,12 +403,12 @@ const orderDetails=async(req,res)=>{
 }
 const orderCancel=async(req,res)=>{
     try{
-        console.log('2')
+       
         const {userId}=req.session     
         // const {id,total}=req.query
         const id=req.body.orderId
         const total=req.body.total
-        console.log(id,'kkk')
+        
         
         const status1="Cancelled"
         const order=await orderDB.findOne({_id:id}).populate('products.productId')
@@ -436,7 +441,7 @@ const orderCancel=async(req,res)=>{
 }
 const returnOrder=async(req,res)=>{
     try{
-        const {id}=req.body
+        const id=req.body.orderId
         const status1="Return Pending"
        await orderDB.updateOne({_id:id},{$set:{status:status1}})
        res.json({success:true,status:status1})
@@ -449,7 +454,7 @@ const loadWallet=async(req,res)=>{
     try{
         const user=req.session.userId
         const wallet=await User.findById({_id:user})
-        console.log(wallet)
+        
         res.render('wallet',{user,wallet})
 
     }catch(error){
@@ -468,6 +473,91 @@ const orderList=async(req,res)=>{
         console.log(error.message)
     }
 }
+const forgotPassword=async (req,res)=>{
+    try{
+       
+    res.render('forgetPassword')
+    }catch{
+        console.log(error.message)
+    }
+}
+const forgotPasswordPost=async(req,res)=>{
+    try{
+        const email=req.body.email
+     
+        const user=await User.findOne({email:email})
+        if(user){
+        if(user.is_verified==1){
+            if(user.is_block==false){
+                const generateOtp = Math.floor(1000 + Math.random() * 9999)
+                otp = generateOtp;
+
+                sendVerifyMail(req.body.name, req.body.email, otp);
+                req.session.email=email
+                console.log(req.session.email,'jasdfj')
+                res.render('forgotPasswordOtp',{email})
+
+            }else{
+                res.render('forgetPassword',{message:"User is blocked..."})
+            }
+        }else{
+            res.render('forgetPassword',{message:'User is not verified'})
+        }
+    }else{
+        res.render('forgetPassword',{message:'User is not found'})
+    }
+    }catch(error){
+        console.log(error.message)
+    }
+}
+const newPassword=async(req,res)=>{
+    try{
+      
+        const {password,email}=req.body
+       
+        const passwordHash=await bcrypt.hash(password, 10);
+
+        const user=await User.updateOne({
+            email:email
+        },{$set:{password:passwordHash}})
+        res.redirect('/login')
+
+    }catch(error){
+        console.log(error.message)
+    }
+}
+const forgotPasswordOtp=async(req,res)=>{
+    try{
+        const email=req.session.email
+        console.log(email,'emailll')
+        let {message} = req.session
+        req.session.message=''
+        res.render('forgotPasswordOtp',{message,email})
+
+    }catch(error){
+        console.log(error.message)
+    }
+}
+const forgotOtpPost=async (req,res)=>{
+    try{
+       const email=req.session.email
+    
+        const user=await User.findOne({email:email})
+
+        const otpget=req.body.otp
+        if(otpget==otp){
+            res.render('newPassword',{email})
+        }else{
+            req.session.message='OTP is incorrect'
+            res.redirect('/forgotPasswordOtp')
+        }
+        
+
+    }catch(error){
+        console.log(error.message)
+    }
+}
+
 
 
 
@@ -497,8 +587,13 @@ module.exports = {
     orderCancel,
     loadWallet,
     returnOrder,
-    orderList
-
+    orderList,
+    forgotPassword,
+    forgotPasswordPost,
+    newPassword,
+    forgotPasswordOtp,
+    forgotOtpPost,
+   
 
 
 }

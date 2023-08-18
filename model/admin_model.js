@@ -10,4 +10,4 @@ const adminSchema=new mongoose.Schema({
         required:true,
     }
 })
-module.export=mongoose.model('admin',adminSchema)
+module.exports=mongoose.model('admin',adminSchema)

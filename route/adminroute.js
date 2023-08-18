@@ -5,6 +5,7 @@ const multer=require('multer');
 const admincontroller=require("../controller/admin_controller");
 const productcontroller=require('../controller/product_controller')
 const couponController=require('../controller/couponController')
+const bannerController=require('../controller/bannerController')
 const adminAuth = require('../middleware/adminAuth')
 const image = require('../cnofig/multer')
 
@@ -16,7 +17,24 @@ rout.set('views','./views/admin')
 // admin login
 rout.get('/',adminAuth.isLogout,admincontroller.adminlogin)
 rout.post('/login',adminAuth.isLogout,admincontroller.adminverify)
+rout.get('/logout',adminAuth.isLogin,admincontroller.logout)
+
+// admin dashboard
+
 rout.get( '/dashboard',adminAuth.isLogin,admincontroller.adminDashboard)
+rout.get( '/salesReport',adminAuth.isLogin,admincontroller.salesReportload)
+// rout.post( '/salesReport',adminAuth.isLogin,admincontroller.salesReport)
+
+// Banner
+rout.get('/bannerLoad',bannerController.bannerLoad)
+rout.get('/addBanner',bannerController.addBanner)
+rout.post('/addBanner',adminAuth.isLogin,image.upload.array('image',5),bannerController.addBannerPost)
+rout.get('/deleteBanner',bannerController.deleteBanner)
+rout.get('/editBanner',bannerController.editBannerload)
+rout.post('/editBanner',image.upload.array('image',5),bannerController.editBanner)
+
+
+
 
 // userlist
 rout.get('/userlist',adminAuth.isLogin,admincontroller.userlist)
@@ -36,7 +54,7 @@ rout.get('/catblock/',adminAuth.isLogin,admincontroller.catblock)
 rout.get('/product',adminAuth.isLogin,productcontroller.productlist)
 rout.get('/addproduct',adminAuth.isLogin,productcontroller.add_product);
 rout.post('/addproduct',adminAuth.isLogin,image.upload.array('image',5), productcontroller.insertproduct);
-rout.get('/editproduct',adminAuth.isLogin,image.upload.array('image',5),productcontroller.editproduct)
+rout.get('/editproduct',productcontroller.editproduct)
 rout.post('/editproduct',adminAuth.isLogin,image.upload.array('image',5),productcontroller.posteditproduct)
 rout.get('/blockproduct/',adminAuth.isLogin,productcontroller.productBlock)
 

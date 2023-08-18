@@ -15,8 +15,8 @@
                             <article class="icontext">
                                 <span class="icon icon-sm rounded-circle bg-primary-light"><i class="text-primary material-icons md-monetization_on"></i></span>
                                 <div class="text">
-                                    <h6 class="mb-1 card-title">Revenue</h6>
-                                    <span>$13,456.5</span>
+                                    <h6 class="mb-1 card-title">Total Revenue</h6>
+                                    <span>₹<%=totalrevenue[0].total%></span>
                                     <span class="text-sm"> Shipping fees are not included </span>
                                 </div>
                             </article>
@@ -28,8 +28,7 @@
                                 <span class="icon icon-sm rounded-circle bg-success-light"><i class="text-success material-icons md-local_shipping"></i></span>
                                 <div class="text">
                                     <h6 class="mb-1 card-title">Orders</h6>
-                                    <span>53.668</span>
-                                    <span class="text-sm"> Excluding orders in transit </span>
+                                    <span><%=ordercount%></span>
                                 </div>
                             </article>
                         </div>
@@ -40,8 +39,8 @@
                                 <span class="icon icon-sm rounded-circle bg-warning-light"><i class="text-warning material-icons md-qr_code"></i></span>
                                 <div class="text">
                                     <h6 class="mb-1 card-title">Products</h6>
-                                    <span>9.856</span>
-                                    <span class="text-sm"> In 19 Categories </span>
+                                    <span><%=productcount%></span>
+                                    <span class="text-sm"> In <b><%=categoryCount%></b> Categories </span>
                                 </div>
                             </article>
                         </div>
@@ -51,8 +50,20 @@
                             <article class="icontext">
                                 <span class="icon icon-sm rounded-circle bg-info-light"><i class="text-info material-icons md-shopping_basket"></i></span>
                                 <div class="text">
-                                    <h6 class="mb-1 card-title">Monthly Earning</h6>
-                                    <span>$6,982</span>
+                                    <h6 class="mb-1 card-title">Current Month Earning</h6>
+                                    <span>₹<%=monthlyRevenue[0].earnings%></span>
+                                    <span class="text-sm"> Based in your local time. </span>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card card-body mb-4">
+                            <article class="icontext">
+                                <span class="icon icon-sm rounded-circle bg-info-light"><i class="text-info material-icons md-shopping_basket"></i></span>
+                                <div class="text">
+                                    <h6 class="mb-1 card-title">current Week Revenue</h6>
+                                    <span>₹<%=currentWeekRevenue[0].total%></span>
                                     <span class="text-sm"> Based in your local time. </span>
                                 </div>
                             </article>
@@ -62,206 +73,71 @@
                 <div class="row">
                     <div class="col-xl-8 col-lg-12">
                         <div class="card mb-4">
-                            <article class="card-body">
-                                <h5 class="card-title">Sale statistics</h5>
-                                <canvas id="myChart" height="120px"></canvas>
+                           
+                          <article class="card-body">
+                           
+                                <div id="myChart1"></div>
+                                
                             </article>
+                      
                         </div>
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="card mb-4">
-                                    <article class="card-body">
-                                        <h5 class="card-title">New Members</h5>
-                                        <div class="new-member-list">
-                                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="admin_asset/imgs/people/avatar-4.png" alt="" class="avatar" />
-                                                    <div>
-                                                        <h6>Patric Adams</h6>
-                                                        <p class="text-muted font-xs">Sanfrancisco</p>
-                                                    </div>
-                                                </div>
-                                                <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Add</a>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="admin_asset/imgs/people/avatar-2.png" alt="" class="avatar" />
-                                                    <div>
-                                                        <h6>Dilan Specter</h6>
-                                                        <p class="text-muted font-xs">Sanfrancisco</p>
-                                                    </div>
-                                                </div>
-                                                <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Add</a>
-                                            </div>
-                                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="admin_asset/imgs/people/avatar-3.png" alt="" class="avatar" />
-                                                    <div>
-                                                        <h6>Tomas Baker</h6>
-                                                        <p class="text-muted font-xs">Sanfrancisco</p>
-                                                    </div>
-                                                </div>
-                                                <a href="#" class="btn btn-xs"><i class="material-icons md-add"></i> Add</a>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="card mb-4">
-                                    <article class="card-body">
-                                        <h5 class="card-title">Recent activities</h5>
-                                        <ul class="verti-timeline list-unstyled font-sm">
-                                            <li class="event-list">
-                                                <div class="event-timeline-dot">
-                                                    <i class="material-icons md-play_circle_outline font-xxl"></i>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="me-3">
-                                                        <h6><span>Today</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div>Lorem ipsum dolor sit amet consectetur</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list active">
-                                                <div class="event-timeline-dot">
-                                                    <i class="material-icons md-play_circle_outline font-xxl animation-fade-right"></i>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="me-3">
-                                                        <h6><span>17 May</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div>Debitis nesciunt voluptatum dicta reprehenderit</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="event-timeline-dot">
-                                                    <i class="material-icons md-play_circle_outline font-xxl"></i>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="me-3">
-                                                        <h6><span>13 May</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div>Accusamus voluptatibus voluptas.</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="event-timeline-dot">
-                                                    <i class="material-icons md-play_circle_outline font-xxl"></i>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="me-3">
-                                                        <h6><span>05 April</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div>At vero eos et accusamus et iusto odio dignissi</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="event-timeline-dot">
-                                                    <i class="material-icons md-play_circle_outline font-xxl"></i>
-                                                </div>
-                                                <div class="media">
-                                                    <div class="me-3">
-                                                        <h6><span>26 Mar</span> <i class="material-icons md-trending_flat text-brand ml-15 d-inline-block"></i></h6>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div>Responded to need “Volunteer Activities</div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
+
+                       
                     </div>
+                    
                     <div class="col-xl-4 col-lg-12">
                         <div class="card mb-4">
                             <article class="card-body">
                                 <h5 class="card-title">Revenue Base on Area</h5>
-                                <canvas id="myChart2" height="217"></canvas>
+                               <div id="myChart3"></div>
                             </article>
                         </div>
+                       
+                    </div>
+                    <div class="col-xl-8 col-lg-12">
                         <div class="card mb-4">
+                           
                             <article class="card-body">
-                                <h5 class="card-title">Marketing Chanel</h5>
-                                <span class="text-muted font-xs">Facebook</span>
-                                <div class="progress mb-3">
-                                    <div class="progress-bar" role="progressbar" style="width: 15%">15%</div>
-                                </div>
-                                <span class="text-muted font-xs">Instagram</span>
-                                <div class="progress mb-3">
-                                    <div class="progress-bar" role="progressbar" style="width: 65%">65%</div>
-                                </div>
-                                <span class="text-muted font-xs">Google</span>
-                                <div class="progress mb-3">
-                                    <div class="progress-bar" role="progressbar" style="width: 51%">51%</div>
-                                </div>
-                                <span class="text-muted font-xs">Twitter</span>
-                                <div class="progress mb-3">
-                                    <div class="progress-bar" role="progressbar" style="width: 80%">80%</div>
-                                </div>
-                                <span class="text-muted font-xs">Other</span>
-                                <div class="progress mb-3">
-                                    <div class="progress-bar" role="progressbar" style="width: 80%">80%</div>
-                                </div>
+                                <h5 class="card-title">User statistics</h5>
+                                <div id="myChart2"></div>
+                                
                             </article>
+                      
                         </div>
+
+                       
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <header class="card-header">
-                        <h4 class="card-title">Latest orders</h4>
-                        <div class="row align-items-center">
-                            <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                                <div class="custom_select">
-                                    <select class="form-select select-nice">
-                                        <option selected>All Categories</option>
-                                        <option>Women's Clothing</option>
-                                        <option>Men's Clothing</option>
-                                        <option>Cellphones</option>
-                                        <option>Computer & Office</option>
-                                        <option>Consumer Electronics</option>
-                                        <option>Jewelry & Accessories</option>
-                                        <option>Home & Garden</option>
-                                        <option>Luggage & Bags</option>
-                                        <option>Shoes</option>
-                                        <option>Mother & Kids</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-6">
-                                <input type="date" value="02.05.2021" class="form-control" />
-                            </div>
-                            <div class="col-md-2 col-6">
-                                <div class="custom_select">
-                                    <select class="form-select select-nice">
-                                        <option selected>Status</option>
-                                        <option>All</option>
-                                        <option>Paid</option>
-                                        <option>Chargeback</option>
-                                        <option>Refund</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
-
-                    <!-- orderlist -->
-
-                 
-                        <!-- table-responsive end// -->
-                    </div>
+               
                 </div>
-                <div class="pagination-area mt-30 mb-50">
+      <input type="hidden" id="jan" value="<%=salesData[0]%>" />
+      <input type="hidden" id="feb" value="<%=salesData[1]%>" />
+      <input type="hidden" id="mar" value="<%=salesData[2]%>" />
+      <input type="hidden" id="apr" value="<%=salesData[3]%>" />
+      <input type="hidden" id="may" value="<%=salesData[4]%>" />
+      <input type="hidden" id="jun" value="<%=salesData[5]%>" />
+      <input type="hidden" id="jul" value="<%=salesData[6]%>" />
+      <input type="hidden" id="aug" value="<%=salesData[7]%>" />
+      <input type="hidden" id="sep" value="<%=salesData[8]%>" />
+      <input type="hidden" id="oct" value="<%=salesData[9]%>" />
+      <input type="hidden" id="nov" value="<%=salesData[10]%>" />
+      <input type="hidden" id="dec" value="<%=salesData[11]%>" />
+      
+
+      <!-- users by year -->
+      <input type="hidden" id="jans" value="<%=userdata[0]%>" />
+      <input type="hidden" id="febs" value="<%=userdata[1]%>" />
+      <input type="hidden" id="mars" value="<%=userdata[2]%>" />
+      <input type="hidden" id="aprs" value="<%=userdata[3]%>" />
+      <input type="hidden" id="mays" value="<%=userdata[4]%>" />
+      <input type="hidden" id="juns" value="<%=userdata[5]%>" />
+      <input type="hidden" id="juls" value="<%=userdata[6]%>" />
+      <input type="hidden" id="augs" value="<%=userdata[7]%>" />
+      <input type="hidden" id="seps" value="<%=userdata[8]%>" />
+      <input type="hidden" id="octs" value="<%=userdata[9]%>" />
+      <input type="hidden" id="novs" value="<%=userdata[10]%>" />
+      <input type="hidden" id="decs" value="<%=userdata[11]%>" />
+                <!-- <div class="pagination-area mt-30 mb-50">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-start">
                             <li class="page-item active"><a class="page-link" href="#">01</a></li>
@@ -274,7 +150,208 @@
                             </li>
                         </ul>
                     </nav>
-                </div>
+                </div> -->
             </section>
+             <%- include('./layout/admin_footer.ejs')%>
             <!-- content-main end// -->
-            <%- include('./layout/admin_footer.ejs')%>
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+          <script>
+
+      var placedCount = parseInt("<%= placedcount %>");
+      var deliveredCount = parseInt("<%= deliveredcount %>");
+      var cancelledCount = parseInt("<%= cancelcount %>");
+      let jans = Number(document.getElementById("jans").value);
+      let febs = Number(document.getElementById("febs").value);
+      let mars = Number(document.getElementById("mars").value);
+      let aprs = Number(document.getElementById("aprs").value);
+      let mays = Number(document.getElementById("mays").value);
+      let juns = Number(document.getElementById("juns").value);
+      let juls = Number(document.getElementById("juls").value);
+      let augs = Number(document.getElementById("augs").value);
+      let seps = Number(document.getElementById("seps").value);
+      let octs = Number(document.getElementById("octs").value);
+      let novs = Number(document.getElementById("novs").value);
+      let decs = Number(document.getElementById("decs").value);
+      // sales
+      let jan=Number(document.getElementById("jan").value)
+        let feb=Number(document.getElementById("feb").value)
+        let mar=Number(document.getElementById("mar").value)
+        let apr=Number(document.getElementById("apr").value)
+        let may=Number(document.getElementById("may").value)
+        let jun=Number(document.getElementById("jun").value)
+        let jul=Number(document.getElementById("jul").value)
+        let aug=Number(document.getElementById("aug").value)
+        let sep=Number(document.getElementById("sep").value)
+        let oct=Number(document.getElementById("oct").value)
+        let nov=Number(document.getElementById("nov").value)
+        let dec=Number(document.getElementById("dec").value)
+      
+        var options = {
+          series: [{
+            name: "Desktops",
+            data: [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+        }],
+          chart: {
+          height: 350,
+          type: 'line',
+          zoom: {
+            enabled: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight'
+        },
+        title: {
+          text: 'Sales Trends by Month',
+          align: 'left'
+        },
+        grid: {
+          row: {
+            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.5
+          },
+        },
+        xaxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep','oct','nov','dec'],
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#myChart1"), options);
+        chart.render();
+      
+
+
+      var barOptions = {
+        series: [
+          {
+            name: "Servings",
+            data: [
+              jans,
+              febs,
+              mars,
+              aprs,
+              mays,
+              juns,
+              juls,
+              augs,
+              seps,
+              octs,
+              novs,
+              decs,
+            ],
+          },
+        ],
+        annotations: {
+          points: [
+            {
+              x: "user",
+              seriesIndex: 0,
+              label: {
+                borderColor: "#775DD0",
+                offsetY: 0,
+                style: {
+                  color: "#fff",
+                  background: "#775DD0",
+                },
+                text:"users",
+              },
+            },
+          ],
+        },
+        chart: {
+          height: 350,
+          type: "bar",
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 10,
+            columnWidth: "50%",
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          width: 2,
+        },
+        grid: {
+          row: {
+            colors: ["#fff", "#f2f2f2"],
+          },
+        },
+        xaxis: {
+          labels: {
+            rotate: -45,
+          },
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
+          tickPlacement: "on",
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shade: "light",
+            type: "horizontal",
+            shadeIntensity: 0.25,
+            gradientToColors: undefined,
+            inverseColors: true,
+            opacityFrom: 0.85,
+            opacityTo: 0.85,
+            stops: [50, 0, 100],
+          },
+        },
+      };
+
+      var barChart = new ApexCharts(
+        document.querySelector("#myChart2"),
+        barOptions
+      );
+      barChart.render();
+
+       
+        // user graph
+       
+      
+        var options = {
+          series: [placedCount,deliveredCount,cancelledCount],
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: ['placedCount',"deliveredCount",'cancelledCount'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#myChart3"), options);
+        chart.render();
+      
+      
+      
+          </script>
+            
+           

@@ -137,13 +137,14 @@
               
               <td>
                 <form action="/admin/order_details" method="post">
-                  <select name="status" id="statusDropdown" class="custom-dropdown form-control" aria-valuenow="<%=order.status %>"`
+                  <select name="status" id="statusDropdown" class="custom-dropdown form-control" aria-valuenow="<%=order.status %>"
                     <option value="placed"<%if(order.status =="placed"){%> selected <%}%>>placed</option>
                     <option value="processing" <%if(order.status ==='processing'){%> selected <%}%>>Processing</option>
-                    <option value="shipped" <%if(order.status ==='shipped'){%> selected <%}%>>Shipped</option>
+                    <option value="processing" <%if(order.status ==='processing'){%> selected <%}%>>Processing</option>
+                    <option value="placed" <%if(order.status ==='placed'){%> selected <%}%>>placed</option>
                     <option value="out for delivery" <%if(order.status ==='out for delivery'){%> selected <%}%>>Out for Delivery</option>
                     <option value="delivered"  <%if(order.status ==='delivered'){%> selected <%}%>>Delivered</option>
-                    <option value="cancelled"  <%if(order.status ==='Cancelled'){%> selected <%}%>>Cancelled</option>
+                    <option value="Cancelled"  <%if(order.status ==='Cancelled'){%> selected <%}%>>Cancelled</option>
                   </select>
                   <input type="hidden" value="<%=product._id %>" name="proid">
                   <input type="hidden" value="<%= order._id %>" name="orderid">

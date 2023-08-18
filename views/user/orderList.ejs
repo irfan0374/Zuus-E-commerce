@@ -55,7 +55,14 @@
             <div class="text-center mt-3">
               <a class="btn btn-primary btn-sm view-details-btn"
                 href="/orderDetails?id=<%= cart._id %>">View Details</a>
-              <% if (cart.status === "Cancelled") { %>
+                <% if (cart.status === "delivered") { %>
+                  <a class="btn btn-danger btn-sm delete-btn"
+                  onclick="returnOrder('<%= cart._id %>','<%= cart.totalAmount %>')">return</a>
+                  <% }else if(cart.status==="Return Pending"){%>
+                    <p class="text-center text-info font-weight-bold" style="font-size: 15px;">
+                      We have successfully assigned the courier partner Delivery to pick up your product.
+                    </p>
+              <% }else if (cart.status === "Cancelled") { %>
                 <div class="alert alert-danger mt-2" role="alert">
                   <strong>Your order has been successfully cancelled.</strong>
                 </div>
@@ -113,4 +120,33 @@ $.ajax({
 })
 
 }
+function returnOrder(orderId){
+  $.ajax({
+  url: '/returnOrder',
+  method: 'patch',
+  data: { orderId },
+
+  success: (response) => {
+    if (response.success) {
+      $('#reloadDiv').load('/orderList #reloadDiv')
+      Swal.fire({
+        title: "Return Pending",
+        icon: 'success',
+        timer: 1500
+      })
+    } else {
+      Swal.fire({
+        title: "Oops",
+        icon: 'error',
+        timer: 1500
+
+      })
+    }
+  },
+  error: (err) => {
+    console.log(err)
+  }
+})
+}
+
 </script>

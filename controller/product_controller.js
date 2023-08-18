@@ -130,7 +130,7 @@ const productDetails = async (req, res) => {
     try {
         const id = req.query.id
         const user = req.session.userId
-        const productData = await productdb.findById({ _id: id, user })
+        const productData = await productdb.findById({ _id:id})
        
 
         res.render('singleproduct', { proData:productData, user })

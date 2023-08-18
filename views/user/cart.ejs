@@ -168,7 +168,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h5><%=item.productId.price%></h5>
+                                    <h5>₹<%=item.productId.price%></h5>
                                 </td>
                                 <td class="quantity__item">
                                     <div class="quantity">
@@ -180,7 +180,7 @@
                                     </div>
                                 </td> 
                                 <td>
-                                    <h5><%=item.total%></h5>
+                                    <h5>₹<%=item.total%></h5>
                                 </td>
                                 <td class="product-remove">
                                     <!-- Use the "btn" and "btn-danger" classes for a red delete button -->
@@ -204,7 +204,7 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td class="subtotal-value">
-                                <h5><%= total %></h5>
+                                <h5>₹<%= total %></h5>
                             </td>
                         </tr>
                                
@@ -288,5 +288,7 @@
             })
         }
     </script>
+
+    
   
     <%- include('./layouts/footer.ejs')%>

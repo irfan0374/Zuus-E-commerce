@@ -1,0 +1,62 @@
+<%-include('../admin/layout/admin_header.ejs')%>
+
+<section class="content-main">
+    <div class="content-header">
+      <div>
+        <h2 class="content-title card-title">Banner List</h2>
+      </div>
+      <div>
+        <a href="/admin/addBanner" class="btn btn-primary btn-sm rounded">Create new</a>
+      </div>
+    </div>
+    <div class="card mb-4">
+      <div class="card-body">
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Sample data -->
+            <%for(let data of banner){%>
+            <tr>
+             
+              <td>
+                <a class="itemside" href="#">
+                  <div class="left">
+                    <img src="/admin_asset/imgs/<%=data.images%>" class="img-md img-thumbnail" alt="Item" />
+                  </div>
+                  <div class="info">
+                    <h6 class="mb-0"><%=data.title%></h6>
+                  </div>
+                </a>
+              </td>
+              <td><%=data.description%></td>
+              <td>
+                <a href="/admin/editBanner?id=<%=data._id%>" class="btn btn-sm font-sm rounded btn-brand">
+                  <i class="material-icons md-edit"></i> Edit
+                </a>
+                <%if(data.unlist ===false){%>
+                <a href="/admin/deleteBanner?id=<%=data._id%>" class="btn btn-sm font-sm  rounded" onclick="return confirm('Are you sure you want to Unlist?')">
+                  <i class="material-icons md-delete_forever"></i> Unlist
+                </a>
+                <%}else{%>
+                  <a href="/admin/deleteBanner?id=<%=data._id%>" class="btn btn-danger btn-sm font-sm btn-light rounded" onclick="return confirm('Are you sure you want to Unlist?')">
+                    <i class="material-icons md-delete_forever"></i> list
+                  </a>
+                  <%}%>
+              </td>
+              
+            </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <%-include('../admin/layout/admin_footer.ejs')%>
+
+  

@@ -212,50 +212,48 @@
         <div class="ordered-products">
             <h3 class="ordered-products-heading">Ordered Products</h3>
             <% if (cart && cart.product) { %>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Product</th>
-                           
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% cart.product.forEach((cart) => { %>
-                            <tr>
-                                <td>
-                                    <div class="ordered-product">
-                                        <div class="ordered-product-image">
-                                            <img src="/admin_asset/imgs/<%= cart.productId.image[0] %>"
-                                                alt="<%= cart.productId.name %>">
-                                        </div>
-                                        <div class="ordered-product-details">
-                                            <div class="ordered-product-name">
-                                                <%= cart.productId.name %>
-                                            </div>
-                                            <div class="ordered-product-price">
-                                                ₹ <%= cart.productId.price %>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <h5><%= cart.quantity %></h5>
-                                </td>
-                               
-                                <td>
-                                    <h5><%= cart.total %></h5>
-                                </td>
-                            </tr>
-                        <% }) %>
-                        <tr >
-                            <td colspan="3" class="text-right"><strong>Subtotal:</strong></td>
-                            <td ><strong id="subtotalRow" ><%= total %></strong></td>
-                        </tr>
-                    </tbody>
+              <div class="container mt-5">
+                <table class="table table-bordered table-hover">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% cart.product.forEach((cart) => { %>
+                      <tr>
+                        <td>
+                          <div class="ordered-product d-flex align-items-center">
+                            <div class="ordered-product-image">
+                              <img src="/admin_asset/imgs/<%= cart.productId.image[0] %>" alt="<%= cart.productId.name %>" class="img-fluid">
+                            </div>
+                            <div class="ordered-product-details">
+                              <div class="ordered-product-name">
+                                <%= cart.productId.name %>
+                              </div>
+                              <div class="ordered-product-price">
+                                ₹ <%= cart.productId.price %>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <h5><%= cart.quantity %></h5>
+                        </td>
+                        <td class="align-middle">
+                          <h5><%= cart.total %></h5>
+                        </td>
+                      </tr>
+                    <% }) %>
+                    <tr>
+                      <td colspan="2" class="text-right"><strong>Subtotal:</strong></td>
+                      <td class="text-center"><strong id="subtotalRow"><%= total %></strong></td>
+                    </tr>
+                  </tbody>
                 </table>
+              </div>
             <% } else { %>
                 <p>No products in cart</p>
             <% } %>
@@ -289,8 +287,14 @@
                 </label>
               </div>
             <% }) } else { %>
-              <div class="no-address text-center">
-                <strong>NO address</strong>
+              <div class="container mt-4">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <div class="no-address-box text-center bg-light p-3">
+                      <strong>NO address</strong>
+                    </div>
+                  </div>
+                </div>
               </div>
             <% } %>
           </div>
@@ -389,10 +393,9 @@
     const allTotal = parseInt(allTotals)
     const address = $("input[name=addressOption]:checked").val()
     const paymentMethod = $("input[name=payment]:checked").val();
-    console.log(address);
     e.preventDefault()
-    console.log("object");
-    $.ajax({
+    if(address){
+      $.ajax({
       url: "/checkoutload",
       method: 'post',
       data: {
@@ -416,6 +419,15 @@
         }
       }
     })
+    }else{
+      
+      Swal.fire({
+      icon: 'warning',
+      title: 'Warning',
+      text: 'No address available',
+      confirmButtonText: 'OK'
+    });
+    }
   })
 
   function razorPayPayment(order) {

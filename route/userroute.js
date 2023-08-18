@@ -30,8 +30,8 @@ userroute.get('/signin', userAuth.isLogout, userController.loadlogin);
 userroute.get('/logout', userController.logout)
 
 // product
-userroute.get('/product',userAuth.isLogin, productController.productload)
-userroute.get('/singleproduct', userAuth.isLogin,productController.productDetails)
+userroute.get('/product', productController.productload)
+userroute.get('/singleproduct',productController.productDetails)
 
 // userprofile
 
@@ -78,6 +78,12 @@ userroute.post('/deleteWishlist',userAuth.isLogin, wishlistController.deleteWish
 // wallet
 userroute.get('/loadWallet',userAuth.isLogin, userController.loadWallet)
 
+// forgotPassword
+userroute.get('/forgotPassword',userController.forgotPassword)
+userroute.post('/forgotPassword',userController.forgotPasswordPost)
+userroute.get('/forgotPasswordotp',userController.forgotPasswordOtp)
+userroute.post('/forgotPasswordotp',userController.forgotOtpPost)
+userroute.post('/newPassword',userController.newPassword)
 
 
 
@@ -88,5 +94,7 @@ userroute.get('/loadWallet',userAuth.isLogin, userController.loadWallet)
 
 
 
+
+   
 
 module.exports = userroute     

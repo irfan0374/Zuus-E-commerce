@@ -8192,21 +8192,20 @@ h1, h2, h3, h4, h5,
     .text-wrap, .login-wrap {
       width: 100%; } }
 
-.text-wrap {
-  background: #f75959;
-  background: -moz-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-  background: -webkit-gradient(left top, right bottom, color-stop(0%, #f75959), color-stop(100%, #f35587));
-  background: -webkit-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-  background: -o-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-  background: -ms-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-  background: -webkit-linear-gradient(315deg, #f75959 0%, #f35587 100%);
-  background: -o-linear-gradient(315deg, #f75959 0%, #f35587 100%);
-  background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f75959', endColorstr='#f35587', GradientType=1 );
-  color: #fff; }
-  .text-wrap .text h2 {
-    font-weight: 900;
-    color: #fff; }
+      .text-wrap {
+        background: #3498db;
+        background: -moz-linear-gradient(-45deg, #3498db 0%, #2980b9 100%);
+        background: -webkit-gradient(left top, right bottom, color-stop(0%, #3498db), color-stop(100%, #2980b9));
+        /* ... other gradient definitions ... */
+      }
+      .text-wrap {
+        background: #3498db; /* Your background color or gradient */
+        background-image: url('/admin_asset/imgs/THE\ SOLE\ HOUSE\ _\ Décryptage\ de\ la\ culture\ sneakers.jpeg'); /* Set the path to your image */
+        background-size: cover; /* Adjust to your preference */
+        background-position: center center; /* Adjust to your preference */
+        /* ... other gradient definitions ... */
+      }
+      
 
 .login-wrap {
   position: relative;
@@ -8348,45 +8347,44 @@ h1, h2, h3, h4, h5,
   border-radius: 50px; }
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
-  .btn.btn-primary {
-    background: #f35588;
-    border: 1px solid #f35588;
+    .btn.btn-primary {
+      background: black; /* Change the button color to black */
+      border: 1px solid black; /* Match the button background color */
+      color: #fff;
+      /* ... gradient definitions ... */
+  }
+  .btn.btn-primary:hover {
+    background: #333; /* Change the hover color to a slightly darker shade of black */
+    border: 1px solid #333; /* Match the button hover background color */
     color: #fff;
-    background: #f75959;
-    background: -moz-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-    background: -webkit-gradient(left top, right bottom, color-stop(0%, #f75959), color-stop(100%, #f35587));
-    background: -webkit-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-    background: -o-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-    background: -ms-linear-gradient(-45deg, #f75959 0%, #f35587 100%);
-    background: -webkit-linear-gradient(315deg, #f75959 0%, #f35587 100%);
-    background: -o-linear-gradient(315deg, #f75959 0%, #f35587 100%);
-    background: linear-gradient(135deg, #f75959 0%, #f35587 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f75959', endColorstr='#f35587', GradientType=1 ); }
-    .btn.btn-primary:hover {
-      border: 1px solid #f35588;
-      background: #f35588;
-      color: #fff; }
-    .btn.btn-primary.btn-outline-primary {
-      border: 1px solid #f35588;
-      background: transparent;
-      color: #f35588; }
-      .btn.btn-primary.btn-outline-primary:hover {
-        border: 1px solid transparent;
-        background: #f35588;
-        color: #fff; }
-  .btn.btn-white {
-    background: #fff;
-    border: 1px solid #fff;
-    color: #fff; }
-    .btn.btn-white:hover {
-      border: 1px solid #fff;
-      background: transparent;
-      color: #fff; }
-    .btn.btn-white.btn-outline-white {
-      border: 1px solid #fff;
-      background: transparent;
-      color: #fff; }
-      .btn.btn-white.btn-outline-white:hover {
-        border: 1px solid transparent;
-        background: #fff;
-        color: #000; }
+}
+.btn.btn-primary.btn-outline-primary {
+  border: 1px solid black; /* Change the outline button border color to black */
+  background: transparent;
+  color: black; /* Change the outline button text color to black */
+}
+
+.btn.btn-primary {
+  background: black;
+  border: 1px solid black;
+  color: #fff;
+  /* ... gradient definitions ... */
+}
+
+.btn.btn-primary:hover {
+  background: #333;
+  border: 1px solid #333;
+  color: #fff;
+}
+
+.btn.btn-primary.btn-outline-primary {
+  border: 1px solid black;
+  background: transparent;
+  color: black;
+}
+
+.btn.btn-primary.btn-outline-primary:hover {
+  border: 1px solid #333;
+  background: transparent;
+  color: #333;
+}

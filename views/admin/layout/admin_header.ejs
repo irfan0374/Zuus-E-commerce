@@ -27,9 +27,7 @@
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css"> -->
     <!-- Place the Bootstrap 5 JavaScript library link here -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script> -->
-      <style>
-
-        
+      <style>   
         .submenu {
     display: none;
     /* Add any other styles you want for the hidden submenu */
@@ -63,17 +61,29 @@
                     <img src="/img/images.png" class="logo" alt="ZUUS" />
                 </a>
                 <div>
+                    
                     <button class="btn btn-icon btn-aside-minimize"><i class="text-muted material-icons md-menu_open"></i></button>
                 </div>
             </div>
             <nav>
                 <ul class="menu-aside">
-                    <li class="menu-item ">
+                    <!-- some issue in this button that why i hidden this -->
+                    <li class="menu-item" hidden>
+                        <a class="menu-link" href="">
+                            <i class=""></i>
+                            <span class="text"></span>
+                        </a>
+                    </li>
+                    <!--error -->
+                    
+                 <li class="menu-item ">
                         <a class="menu-link" href="/admin/dashboard">
                             <i class="icon material-icons md-home"></i>
                             <span class="text">Dashboard</span>
                         </a>
+                      
                     </li>
+                  
                     <li class="menu-item ">
                         <a class="menu-link" href="/admin/product">
                             <i class="icon material-icons md-shopping_bag"></i>
@@ -117,16 +127,16 @@
                         
                     </li>
                     <li class="menu-item ">
-                        <a class="menu-link" href="#">
+                        <a class="menu-link" href="/admin/salesReport">
                             <i class="icon material-icons md-person"></i>
-                            <span class="text">Account</span>
+                            <span class="text">Sales Report</span>
                         </a>
                        
                     </li>
                     <li class="menu-item">
-                        <a class="menu-link" href="page-reviews.html">
+                        <a class="menu-link" href="/admin/bannerLoad">
                             <i class="icon material-icons md-comment"></i>
-                            <span class="text">Reviews</span>
+                            <span class="text">Banner</span>
                         </a>
                     </li>
                     <li class="menu-item has-submenu">
@@ -138,12 +148,7 @@
                             <a href="/admin/listcoupon">Couponlist</a>
                         </div>
                     </li>
-                    <li class="menu-item">
-                        <a class="menu-link" disabled href="#">
-                            <i class="icon material-icons md-pie_chart"></i>
-                            <span class="text">Statistics</span>
-                        </a>
-                    </li>
+
                 </ul>
                 <hr />
                 <!-- <ul class="menu-aside">
@@ -170,20 +175,8 @@
         </aside>
         <main class="main-wrap">
             <header class="main-header navbar">
-                <div class="col-search">
-                    <form class="searchform">
-                        <div class="input-group">
-                            <input list="search_terms" type="text" class="form-control" placeholder="Search term" />
-                            <button class="btn btn-light bg" type="button"><i class="material-icons md-search"></i></button>
-                        </div>
-                        <datalist id="search_terms">
-                            <option value="Products"></option>
-                            <option value="New orders"></option>
-                            <option value="Apple iphone"></option>
-                            <option value="Ahmed Hassan"></option>
-                        </datalist>
-                    </form>
-                </div>
+              
+                
                 <div class="col-nav">
                     <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i class="material-icons md-apps"></i></button>
                     <ul class="nav">
@@ -207,6 +200,11 @@
                                 <a class="dropdown-item" href="#"><img src="admin_asset/imgs/theme/flag-jp.png" alt="Français" />日本語</a>
                                 <a class="dropdown-item" href="#"><img src="admin_asset/imgs/theme/flag-cn.png" alt="Français" />中国人</a>
                             </div>
+                        </li>
+                        <li>
+                            <div class="container mt-4">
+                                <a href="/logout" class="btn btn-dark btn-sm" id="logoutBtn">Logout</a>
+                              </div>
                         </li>
                         <li class="dropdown nav-item">
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
