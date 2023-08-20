@@ -15,9 +15,9 @@ rout.set('views','./views/admin')
 
 
 // admin login
-rout.get('/',adminAuth.isLogout,admincontroller.adminlogin)
-rout.post('/login',adminAuth.isLogout,admincontroller.adminverify)
-rout.get('/logout',adminAuth.isLogin,admincontroller.logout)
+rout.get('/' ,adminAuth.isLogout,admincontroller.adminlogin)
+rout.post('/login' ,adminAuth.isLogout,admincontroller.adminverify)
+rout.get('/logout',adminAuth.isLogin,admincontroller.logout) 
 
 // admin dashboard
 
