@@ -79,7 +79,7 @@ const adminDashboard = async (req, res) => {
     //     $group: { _id: null, total: { $sum: "$totalAmount" }, count: { $sum: 1 } },
     //   },
     // ]);
-    //     console.log(todayRevenue,'hel')
+    //    
     //     if (todayRevenue === 0) {
     //         todayRevenue.push({ _id: null, total: 0, count: 0 })
     //     }
@@ -99,7 +99,7 @@ const currentWeekRevenue = await orderdb.aggregate([
         $group: { _id: null, total: { $sum: '$totalAmount' }, count: { $sum: 1 } }
     }
 ]);
-        console.log(currentWeekRevenue,"currentweek");
+  
         if (currentWeekRevenue === 0) {
             currentWeekRevenue.push({ _id: null, total: 0, count: 0 })
         }
@@ -208,8 +208,7 @@ const currentWeekRevenue = await orderdb.aggregate([
         for (let i = 0; i < users.length; i++) {
             userdata.push(users[i].count)
         }
-        console.log(salesData);
-        console.log(userdata,"user")
+      
         
         res.render('home', {
             // todayRevenue,
@@ -406,7 +405,7 @@ const salesReportload = async (req, res) => {
             .limit(SALES_PER_PAGE)
             .sort({ createdAt: -1 })
             .populate('products.productId')
-        console.log(order);
+      
         res.render('salesReport', { order, totalPage, moment, req })
 
     } catch (error) {
