@@ -1,65 +1,81 @@
 /* banner area css
 ============================================================================================ */
-.banner-area {
-	background: url() center no-repeat;
+.banner-area{
+	background: url('/public/img/banner/banner-bg.jpg') center no-repeat;
 	background-size: cover;
 	position: relative;
+
+	/* Media query for adjusting height on smaller screens */
 	.fullscreen {
 		@media (max-width: 768px) {
 			height: 650px !important;
 		}
 	}
+
+	/* Owl carousel navigation styles */
 	.active-banner-slider {
 		.owl-nav {
 			position: absolute;
 			right: 0;
 			bottom: -200px;
+
 			@media (max-width: 1920px) {
 				right: -115px;
 			}
 			@media (max-width: 1680px) {
-				right: 0px;
+				right: 0;
 			}
 			@media (max-width: 991px) {
 				display: none;
 			}
+
 			.owl-prev,
 			.owl-next {
 				display: inline-block;
 				margin: 10px;
-				opacity: .5;
-				@include transition();
+				opacity: 0.5;
+				transition: opacity 0.3s;
+
 				&:hover {
 					opacity: 1;
 				}
 			}
 		}
 	}
+
+	/* Banner content styles */
 	.banner-content {
 		padding-left: 10px;
+
 		@media (max-width: 991px) {
 			padding-left: 0;
 		}
+
 		h1 {
 			font-size: 60px;
 			line-height: 66px;
 			font-weight: 700;
 			margin-bottom: 30px;
+
 			@media (max-width: 767px) {
 				font-size: 35px;
 				line-height: 46px;
 			}
 		}
+
 		p {
 			margin: 0;
 		}
 	}
+
+	/* Banner image styles */
 	.banner-img {
 		@media (max-width: 991px) {
 			display: none;
 		}
 	}
 }
+
 .add-bag {
 	margin-top: 30px;
 	.add-btn {
@@ -88,15 +104,17 @@
 //------- Start Bread Crumb --------//
 
 .organic-breadcrumb {
-	background: url("/admin_asset/imgs/1692174802741-[removal.ai]_916949d0-b615-497f-a420-f94069522e32-air-jordan-1-retro-ultra-high-men-white-_-mtlc-gold-coin-black-pure-platinum.png") center no-repeat;
+	background: url('/public/img/banner/common-banner.jpg') center no-repeat;
 	background-size: cover;
 	padding-top: 130px;
+
 	@media (max-width: 991px) {
 		padding-top: 80px;
 	}
+
 	@media (max-width: 767px) {
 		background: none;
-		@include gradient(90deg, $primary-color 0%, $primary-color2 100%);
+		/* Apply your gradient or background color here */
 	}
 }
 #category {

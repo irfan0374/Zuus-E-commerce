@@ -1,4 +1,5 @@
 <%- include('./layouts/header.ejs') %>
+
 <br>
 <br>
 <br>
@@ -6,6 +7,7 @@
 <div id="reloadDiv">
 <div class="card" >
   <div class="card-body">
+    <button class="btn btn-danger" onclick="goBack()">Back</button>
     <h5 class="card-title">Order Details</h5>
 
     <% if (order.length) { %>
@@ -148,5 +150,10 @@ function returnOrder(orderId){
   }
 })
 }
+
+function goBack() {
+  window.history.back();
+}
+
 
 </script>

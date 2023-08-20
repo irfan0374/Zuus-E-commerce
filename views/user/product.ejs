@@ -1,21 +1,69 @@
 <%- include('./layouts/header.ejs')%>
 	
-
+<style>
+	/* Custom transparent button styles */
+	.transparent-button {
+	  background: none;
+	  border: none;
+	  padding: 0;
+	  font-size: 16px;
+	  color: white;
+	  cursor: pointer;
+	  text-decoration: underline;
+	  transition: color 0.3s ease;
+	}
+  
+	.transparent-button:hover {
+	  color: white;
+	}
+  
+	.button-like {
+	  background-color: black;
+	  background-color: white;
+	  color: white;
+	  border: none;
+	  padding: 10px 20px;
+	  font-size: 16px;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  font-weight: bold;
+	}
+  </style>
 	<!-- Start Banner Area -->
-	<section class="banner-area organic-breadcrumb">
-		<div class="container">
-			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-				<div class="col-first">
-					<h1>Shop Category page</h1>
-					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-						<a href="/product">Shop<span class="lnr lnr-arrow-right"></span></a>
-						<a href="category.html">Fashon Category</a>
-					</nav>
-				</div>
+	<style>
+		.banner-content {
+		  /* Add margin to the top of the banner area */
+		  margin-top: 150px;
+		}
+	  
+		.banner-content nav a {
+		  /* Add margin between breadcrumb links */
+		  margin-right: 10px;
+		}
+	  
+	
+		.page-navigation {
+		  /* Adjust margin for the navigation bar at the bottom */
+		  margin-top: 40px;
+		  text-align: center; /* Center align the navigation elements */
+		}
+	  
+		
+	  </style>
+	  
+		<!-- Start Banner Area -->
+		
+		<div class="banner-content">
+			<div class="col-first">
+			  <h1>Shop Page</h1>
+			  <nav class="d-flex align-items-center">
+				<a href="/home"><span class="lnr lnr-arrow-right">Home</span></a>
+				<a href="#">Shop</span></a>
+			  </nav>
 			</div>
-		</div>
-	</section>
+		  </div>
 	<!-- End Banner Area -->
 	<div class="container">
 		<div class="row">
@@ -29,11 +77,16 @@
 							<ul>
 								<% category.forEach((value, index) => { %>
 									<li class="filter-list">
+										<label for="categoryName">
+										  <a href="/product?category=<%= value.name %>" class="transparent-button"><b><%= value.name %></b></a>
+										</label>
+									  </li>
+									<!-- <li class="filter-list">
 										
 										<label for="<%= value.name %>" style="color: black;">
 											<a href="/product?category=<%= value.name %>"><b><%= value.name %></b></a>
 										  </label>
-									  </li>
+									  </li> -->
 								<% }) %>
 							  </ul>
 							  
