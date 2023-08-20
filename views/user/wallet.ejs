@@ -3,8 +3,15 @@
 <br><br><br><br><br>
 
 <div class="container">
+    <br>
+
+
+    <button type="button" class="btn btn-light"  onclick="goBack()">Back</button>
+    
     <div class="row">
+       
         <div class="col-lg-6">
+            <br>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-wallet mr-2"></i> My Wallet</h5>
@@ -47,7 +54,9 @@
 </div>
 
 <script>
-    // Your JavaScript code here
+  function goBack(){
+    window.history.back();
+      }
 </script>
 
 <%- include('./layouts/footer.ejs')%>

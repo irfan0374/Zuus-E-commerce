@@ -49,25 +49,38 @@
         transform: translateY(-2px);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
+    
+		.banner-content {
+		  /* Add margin to the top of the banner area */
+		  margin-top: 150px;
+		}
+	  
+		.banner-content nav a {
+		  /* Add margin between breadcrumb links */
+		  margin-right: 10px;
+		}
+	  
+	
+		.page-navigation {
+		  /* Adjust margin for the navigation bar at the bottom */
+		  margin-top: 40px;
+		  text-align: center; /* Center align the navigation elements */
+		}
+	  
 </style>
 </head>
 
 <body>
-        <!-- Start Banner Area -->
-        <section class="banner-area organic-breadcrumb">
-            <div class="container">
-                <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                    <div class="col-first">
-                        <h1>Wishlist</h1>
-                        <nav class="d-flex align-items-center">
-                            <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                            <a href="wishlist.html">Wishlist</a>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Banner Area -->
+       	
+		<div class="banner-content">
+			<div class="col-first">
+			  <h1>Wish List</h1>
+			  <nav class="d-flex align-items-center">
+				<a href="/home"><span class="lnr lnr-arrow-right">Home</span></a>
+				<a href="#">Wishlist</span></a>
+			  </nav>
+			</div>
+		  </div>
       
 
     <!--================Wishlist Area =================-->

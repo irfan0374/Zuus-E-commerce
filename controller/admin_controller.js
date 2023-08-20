@@ -83,22 +83,23 @@ const adminDashboard = async (req, res) => {
     //     if (todayRevenue === 0) {
     //         todayRevenue.push({ _id: null, total: 0, count: 0 })
     //     }
+       const startOfTheWeek = new Date(currentDate);
+startOfTheWeek.setDate(currentDate.getDate() - currentDate.getDay() + 1); // Adjusted calculation for the start of the week
+const endOfTheWeek = new Date(currentDate);
+endOfTheWeek.setDate(startOfTheWeek.getDate() + 6);
 
-        const startOfTheWeek = new Date(currentDate)
-        startOfTheWeek.setDate(currentDate.getDate() - currentDate.getDay())
-        const endOfTheWeek = new Date(currentDate)
-        endOfTheWeek.setDate(startOfTheWeek.getDate() + 6)
-        const currentWeekRevenue = await orderdb.aggregate([
-            {
-                $match: {
-                    status: { $ne: "Cancelled" },
-                    createdAt: { $gte: startOfTheWeek, $lte: endOfTheWeek },
-                },
-            },
-            {
-                $group: { _id: null, total: { $sum: '$totalAmount' }, count: { $sum: 1 } }
-            }
-        ]);
+const currentWeekRevenue = await orderdb.aggregate([
+    {
+        $match: {
+            status: { $ne: "Cancelled" },
+            createdAt: {  $lte: endOfTheWeek },
+        },
+    },
+    {
+        $group: { _id: null, total: { $sum: '$totalAmount' }, count: { $sum: 1 } }
+    }
+]);
+        console.log(currentWeekRevenue,"currentweek");
         if (currentWeekRevenue === 0) {
             currentWeekRevenue.push({ _id: null, total: 0, count: 0 })
         }

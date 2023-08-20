@@ -115,23 +115,35 @@
     font-weight: bold;
     text-transform: uppercase;
 }
-</style>
+    
+	.banner-content {
+		  /* Add margin to the top of the banner area */
+		  margin-top: 150px;
+		}
+	  
+		.banner-content nav a {
+		  /* Add margin between breadcrumb links */
+		  margin-right: 10px;
+		}
+	  
+	
+		.page-navigation {
+		  /* Adjust margin for the navigation bar at the bottom */
+		  margin-top: 40px;
+		  text-align: center; /* Center align the navigation elements */
+		}
+	  
 
-    <!-- Start Banner Area -->
-    <section class="banner-area organic-breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-                <div class="col-first">
-                    <h1>Shopping Cart</h1>
-                    <nav class="d-flex align-items-center">
-                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Cart</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Banner Area -->
+</style>
+<div class="banner-content">
+    <div class="col-first">
+      <h1>Cart Page</h1>
+      <nav class="d-flex align-items-center">
+        <a href="/home"><span class="lnr lnr-arrow-right">Home</span></a>
+        <a href="#">Cart</span></a>
+      </nav>
+    </div>
+  </div>
 
     <!--================Cart Area =================-->
     <div id="reloadDiv">

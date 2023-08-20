@@ -2,6 +2,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 <style>
   /* Custom Styles */
+  .btn-with-margin {
+    margin: 40px; 
+  }
   .card-title {
     font-size: 24px;
     font-weight: bold;
@@ -42,7 +45,7 @@
 </head>
 
 <body>
-
+  <button type="button" class="btn btn-secondary btn-with-margin"  onclick="goBack()">Back</button>        
   <!-- Main Content -->
   <section class="breadcrumb-option">
     <div class="container">
@@ -166,6 +169,9 @@
     function validatePin(pin) {
       const pinRegex = /^\d{6}$/;
       return pinRegex.test(pin);
+    }
+    function goBack(){
+      window.history.back()
     }
   </script>
 </body>
