@@ -203,7 +203,7 @@ const signupverify = async (req, res) => {
 const logout = async (req, res) => {
     try {
         req.session.destroy()
-        res.redirect('/admin/login')
+        res.redirect('/login')
     } catch (error) {
         res.redirect("/error");
         console.log(error.message);
@@ -214,7 +214,7 @@ const homeload = async (req, res) => {
     try {
        
         const user = req.session.userId
-        const product= await productdb.find().sort({createdAt:-1}).limit(8)
+        const product= await productdb.find({is_block:false}).sort({createdAt:-1}).limit(8)
         const banner=await bannerDb.findOne({unlist:false})
         res.render('home', { user,product,banner })
 
@@ -454,6 +454,7 @@ const loadWallet=async(req,res)=>{
     try{
         const user=req.session.userId
         const wallet=await User.findById({_id:user})
+        console.log(wallet);
         
         res.render('wallet',{user,wallet})
 

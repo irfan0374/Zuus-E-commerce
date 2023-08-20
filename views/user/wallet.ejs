@@ -15,7 +15,19 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-wallet mr-2"></i> My Wallet</h5>
-                    <p class="card-text">Your wallet balance: <span class="font-weight-bold">₹<%=wallet.wallet%></span></p>
+                    
+
+<p class="card-text">
+    Your wallet balance: 
+    <span class="font-weight-bold">
+      ₹<% if (!wallet.wallet) { %>
+        0
+      <% } else { %>
+        <%= wallet.wallet %>
+      <% } %>
+    </span>
+  </p> 
+        
                    
                 </div>
             </div>

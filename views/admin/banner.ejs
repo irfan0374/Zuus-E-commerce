@@ -40,11 +40,11 @@
                   <i class="material-icons md-edit"></i> Edit
                 </a>
                 <%if(data.unlist ===false){%>
-                <a href="/admin/deleteBanner?id=<%=data._id%>" class="btn btn-sm font-sm  rounded" onclick="return confirm('Are you sure you want to Unlist?')">
+                <a href="/admin/deleteBanner?id=<%=data._id%>" class="btn btn-sm font-sm  rounded" onclick="return confirm('Are you sure you want to list the banner?')">
                   <i class="material-icons md-delete_forever"></i> Unlist
                 </a>
                 <%}else{%>
-                  <a href="/admin/deleteBanner?id=<%=data._id%>" class="btn btn-danger btn-sm font-sm btn-light rounded" onclick="return confirm('Are you sure you want to Unlist?')">
+                  <a href="/admin/deleteBanner?id=<%=data._id%>" class="btn btn-danger btn-sm font-sm btn-light rounded" onclick="return confirm('Are you sure you want to Unlist the banner?')">
                     <i class="material-icons md-delete_forever"></i> list
                   </a>
                   <%}%>

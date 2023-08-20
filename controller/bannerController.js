@@ -42,7 +42,7 @@ const addBannerPost = async (req, res) => {
 }
 const deleteBanner = async (req, res) => {
     try {
-        console.log("enter");
+        
         const { id } = req.query
         const data = await bannerModel.findById({ _id: id })
         if (data.unlist === false) {
