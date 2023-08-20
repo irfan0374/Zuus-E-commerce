@@ -18,8 +18,9 @@ const adminlogin = async (req, res) => {
 }
 const logout=async(req,res)=>{
     try{
+        console.log("enter")
         req.session.destroy()
-        res.redirect('/login')
+        res.render('login')
 
     }catch(error){
         console.log(error.message)
@@ -92,13 +93,14 @@ const currentWeekRevenue = await orderdb.aggregate([
     {
         $match: {
             status: { $ne: "Cancelled" },
-            createdAt: {  $lte: endOfTheWeek },
+            createdAt: { $lte: endOfTheWeek },
         },
     },
     {
         $group: { _id: null, total: { $sum: '$totalAmount' }, count: { $sum: 1 } }
     }
 ]);
+
   
         if (currentWeekRevenue === 0) {
             currentWeekRevenue.push({ _id: null, total: 0, count: 0 })
