@@ -74,22 +74,7 @@ const adminDashboard = async (req, res) => {
         const endOfTheWeek = new Date(currentDate);
         endOfTheWeek.setDate(startOfTheWeek.getDate() + 6);
 
-const currentWeekRevenue = await orderdb.aggregate([
-    {
-        $match: {
-            status: { $ne: "Cancelled" },
-            createdAt: { $lte: endOfTheWeek ,$gte:startOfTheWeek},
-        },
-    },
-    {
-        $group: { _id: null, total: { $sum: '$totalAmount' }, count: { $sum: 1 } }
-    }
-]);
 
-  
-        if (currentWeekRevenue.length=== 0) {
-            currentWeekRevenue.push({ _id: null, total: 0, count: 0 })
-        }
         const totalrevenue = await orderdb.aggregate([
             {
                 $match: { status: { $ne: "Cancelled" } }
@@ -198,7 +183,6 @@ const currentWeekRevenue = await orderdb.aggregate([
       
         
         res.render('home', {
-            currentWeekRevenue,
             totalrevenue,
             monthlyRevenue,
             salesByYear,
