@@ -69,25 +69,10 @@ const adminDashboard = async (req, res) => {
         currentDate.setSeconds(0);
         currentDate.setMilliseconds(0);
 
-        let todayRevenue = await orderdb.aggregate([
-      {
-        $match: {
-          status: { $ne: "Cancelled" },
-          createdAt: { $gte: currentDate },
-        },
-      },
-      {
-        $group: { _id: null, total: { $sum: "$totalAmount" }, count: { $sum: 1 } },
-      },
-    ]);
-       
-        if (todayRevenue.length === 0) {
-            todayRevenue.push({ _id: null, total: 0, count: 0 })
-        }
-       const startOfTheWeek = new Date(currentDate);
-startOfTheWeek.setDate(currentDate.getDate() - currentDate.getDay() + 1); // Adjusted calculation for the start of the week
-const endOfTheWeek = new Date(currentDate);
-endOfTheWeek.setDate(startOfTheWeek.getDate() + 6);
+        const startOfTheWeek = new Date(currentDate);
+        startOfTheWeek.setDate(currentDate.getDate() - currentDate.getDay() + 1); // Adjusted calculation for the start of the week
+        const endOfTheWeek = new Date(currentDate);
+        endOfTheWeek.setDate(startOfTheWeek.getDate() + 6);
 
 const currentWeekRevenue = await orderdb.aggregate([
     {
@@ -213,7 +198,6 @@ const currentWeekRevenue = await orderdb.aggregate([
       
         
         res.render('home', {
-            todayRevenue,
             currentWeekRevenue,
             totalrevenue,
             monthlyRevenue,
@@ -407,7 +391,7 @@ const salesReportload = async (req, res) => {
               { status: "delivered" },
               { status: "placed" }
             ]
-          })    
+          })
             .skip((page - 1) * SALES_PER_PAGE)
             .limit(SALES_PER_PAGE)
             .sort({ createdAt: -1 })
