@@ -69,21 +69,21 @@ const adminDashboard = async (req, res) => {
         currentDate.setSeconds(0);
         currentDate.setMilliseconds(0);
 
-    //     let todayRevenue = await orderdb.aggregate([
-    //   {
-    //     $match: {
-    //       status: { $ne: "Cancelled" },
-    //       createdAt: { $gte: currentDate },
-    //     },
-    //   },
-    //   {
-    //     $group: { _id: null, total: { $sum: "$totalAmount" }, count: { $sum: 1 } },
-    //   },
-    // ]);
-    //    
-    //     if (todayRevenue === 0) {
-    //         todayRevenue.push({ _id: null, total: 0, count: 0 })
-    //     }
+        let todayRevenue = await orderdb.aggregate([
+      {
+        $match: {
+          status: { $ne: "Cancelled" },
+          createdAt: { $gte: currentDate },
+        },
+      },
+      {
+        $group: { _id: null, total: { $sum: "$totalAmount" }, count: { $sum: 1 } },
+      },
+    ]);
+       
+        if (todayRevenue.length === 0) {
+            todayRevenue.push({ _id: null, total: 0, count: 0 })
+        }
        const startOfTheWeek = new Date(currentDate);
 startOfTheWeek.setDate(currentDate.getDate() - currentDate.getDay() + 1); // Adjusted calculation for the start of the week
 const endOfTheWeek = new Date(currentDate);
@@ -93,7 +93,7 @@ const currentWeekRevenue = await orderdb.aggregate([
     {
         $match: {
             status: { $ne: "Cancelled" },
-            createdAt: { $lte: endOfTheWeek },
+            createdAt: { $lte: endOfTheWeek ,$gte:startOfTheWeek},
         },
     },
     {
@@ -102,7 +102,7 @@ const currentWeekRevenue = await orderdb.aggregate([
 ]);
 
   
-        if (currentWeekRevenue === 0) {
+        if (currentWeekRevenue.length=== 0) {
             currentWeekRevenue.push({ _id: null, total: 0, count: 0 })
         }
         const totalrevenue = await orderdb.aggregate([
@@ -116,7 +116,7 @@ const currentWeekRevenue = await orderdb.aggregate([
                 }
             }
         ]);
-        if (totalrevenue === 0) {
+        if (totalrevenue.length === 0) {
             totalrevenue.push({ _id: null, total: 0, count: 0 })
         }
         const currentMonth = new Date().getMonth() + 1;
@@ -134,7 +134,7 @@ const currentWeekRevenue = await orderdb.aggregate([
                 }
             }
         ]);
-        if (monthlyRevenue === 0) {
+        if (monthlyRevenue.length=== 0) {
             monthlyRevenue.push({ _id: 0, total: 0, count: 0 })
         }
 
@@ -213,7 +213,7 @@ const currentWeekRevenue = await orderdb.aggregate([
       
         
         res.render('home', {
-            // todayRevenue,
+            todayRevenue,
             currentWeekRevenue,
             totalrevenue,
             monthlyRevenue,

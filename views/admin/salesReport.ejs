@@ -5,14 +5,16 @@
         <div class="col-lg-6">
           <h1 class="mt-5">Sales Report</h1>
         </div>
+
         <div class="col-lg-6 text-lg-end">
-          <button type="button" onclick="printDiv('printThisDiv')" class="btn btn-primary mt-4">
-            Print
+          <button type="button" onclick="generateExcel()" class="btn btn-primary mt-4">
+            Excel 
           </button>
-          <button type="button" onclick="downloadCSV()" class="btn btn-primary mt-4">
-            Download CSV
+          <button type="button" onclick="generatePDF()" class="btn btn-primary mt-4">
+            PDF 
           </button>
         </div>
+
       </div>
       <div class="row mt-4 ml-15 mb-3">
         <div class="col-lg-4">
@@ -33,6 +35,7 @@
       <div class="card-body">
         <div class="table-responsive">
           <div id="printThisDiv">
+
             <table class="table table-hover table-bordered" id="tableReport">
               <thead id="tablehead">
                 <tr>
@@ -86,6 +89,7 @@
                     <%})%>
               </tbody>
             </table>
+
           </div>
         </div>
         <!-- table-responsive //end -->
@@ -96,15 +100,81 @@
     <!-- Pagination section goes here -->
   </section>
   <%- include('./layout/admin_footer.ejs')%>
-  <script>
-    function printDiv(divName) {
-   
-    const printContents = document.getElementById(divName).innerHTML;
-    const originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-  }
 
-  </script>
-  
+<!-- sales report download -->
+  <script>
+
+    // PDF Download
+    function generatePDF() {
+
+      const orders = document.querySelectorAll('.table tbody tr');
+
+      const orderRows = [];
+      orders.forEach(order => {
+          const No = order.cells[0].innerText;
+          const Id = order.cells[1].innerText;
+          const Product = order.cells[2].innerText;
+          const Price = order.cells[3].innerText;
+          const Quantity = order.cells[4].innerText;
+          const Payment_Method = order.cells[5].innerText;
+          const Total = order.cells[6].innerText;
+          const Date = order.cells[7].innerText;
+
+          orderRows.push([No, Id, Product, Price, Quantity, Payment_Method, Total, Date]);
+      });
+
+        const pdfFormat = {
+            content: [
+                { text: 'ZUUS Sales Report', style: 'header' },
+                {
+                    table: {
+                        headerRows: 1,
+                        widths: [20,70,70,50,45,30,50,80],
+                        body: [['No','Id', 'Product', 'Price', 'Quantity', 'Payment_Method', 'Total', 'Date'], ...orderRows] }
+                }
+            ],
+            styles: {
+                header: {
+                    fontSize: 20,
+                    bold: true,
+                    alignment: 'center',
+                    margin: [0, 0, 0, 10]
+                }
+            }
+        };
+
+        pdfMake.createPdf(pdfFormat).print();
+    }
+
+    // Excel Download
+    function generateExcel() {
+        const orders = document.querySelectorAll('.table tbody tr');
+
+        const orderData = [];
+      orders.forEach(order => {
+          const No = order.cells[0].innerText;
+          const Id = order.cells[1].innerText;
+          const Product = order.cells[2].innerText;
+          const Price = order.cells[3].innerText;
+          const Quantity = order.cells[4].innerText;
+          const Payment_Method = order.cells[5].innerText;
+          const Total = order.cells[6].innerText;
+          const Date = order.cells[7].innerText;
+
+          orderData.push([No, Id, Product, Price, Quantity, Payment_Method, Total, Date]);
+      });
+
+        const header = ['No','Id', 'Product', 'Price', 'Quantity', 'Payment_Method', 'Total', 'Date'];
+        const data = [header, ...orderData];
+
+        const ws = XLSX.utils.aoa_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sales Report');
+
+        // Generating filename based on the current date and time
+        const filename = 'Sales_Report_' + new Date().toISOString().slice(0, 19).replace(/:/g, '-') + '.xlsx';
+
+        // Convert the workbook to a binary Excel file and trigger the download
+        XLSX.writeFile(wb, filename);
+    }
+</script>

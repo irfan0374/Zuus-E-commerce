@@ -112,11 +112,14 @@
 					document.getElementById('cartCount').innerHTML = `<span class="ti-bag"></span>${response.cartCount}`
 				}else{
 					Swal.fire({
-						title : 'error',
-						icon : 'error' , 
-						text : response.message,
-						timer : 1800
-					})
+        title: 'Oops',
+        text: 'Please log in to continue',
+        icon: 'warning',
+        timer: 1500
+    }).then(() => {
+        // Redirect to the login page
+        window.location.href = '/login'; // Replace '/login' with the actual URL of your login page
+    });
 				}
 			},
 			error : (err) => {
@@ -146,11 +149,14 @@
                
             } else {
                 Swal.fire({
-                    title: 'Oops',
-                    text: response.message,
-                    icon: 'error',
-                    timer: 1500
-                })
+        title: 'Oops',
+        text: 'Please log in to continue',
+        icon: 'warning',
+        timer: 1500
+    }).then(() => {
+        
+        window.location.href = '/login';
+    });
             }
         },
         error: (err) => {

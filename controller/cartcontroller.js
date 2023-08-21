@@ -25,57 +25,65 @@ const cartload=async (req,res)=>{
 }
 const add_tocart=async(req,res)=>{
     try{
-        
+        const {userId}=req.session
         const productId=req.body.prId
         const quantity = req.body.qty
         const cart = await cartdb.findOne({ userId :req.session.userId })
         const product=await productdb.findById({ _id : productId})
     
-        if(cart) {
-            const exist = cart.product.find((item) => item.productId.toString() === productId)
-            if(exist) {
-                const total = product.price * quantity
-                const count = await cartdb.findOneAndUpdate({ userId : req.session.userId , 'product.productId' : productId } , 
-                {
-                    'product.$.quantity' : quantity,
-                    'product.$.price' : product.price,
-                    'product.$.total' : total
-                },{new:true})
-                const length = count.product.length;
-
-                res.json({success : true,cartCount:length})
+    console.log("hhhh");
+        if(userId){
+            console.log("if")
+            if(cart) {
+                const exist = cart.product.find((item) => item.productId.toString() === productId)
+                if(exist) {
+                    const total = product.price * quantity
+                    const count = await cartdb.findOneAndUpdate({ userId : req.session.userId , 'product.productId' : productId } , 
+                    {
+                        'product.$.quantity' : quantity,
+                        'product.$.price' : product.price,
+                        'product.$.total' : total
+                    },{new:true})
+                    const length = count.product.length;
+    
+                    res.json({success : true,cartCount:length})
+                }else{
+                    const total=quantity*product.price
+                  const count =  await cartdb.findOneAndUpdate({  userId : req.session.userId } , {
+                        $push : { product : { 
+                            productId : productId,
+                            quantity:quantity,
+                            price:product.price,
+                            total:total
+                         }}
+                    },{new:true})
+                    const length = count.product.length;
+                    console.log(length)
+    
+                    res.json({success : true,cartCount:length})
+                }
             }else{
-                const total=quantity*product.price
-              const count =  await cartdb.findOneAndUpdate({  userId : req.session.userId } , {
-                    $push : { product : { 
+                console.log("else");
+                const total = product.price * quantity
+                const cart = new cartdb({
+                    userId : req.session.userId,
+                    product : [{
                         productId : productId,
-                        quantity:quantity,
-                        price:product.price,
-                        total:total
-                     }}
-                },{new:true})
-                const length = count.product.length;
+                        quantity : quantity,
+                        price : product.price,
+                        total : total
+                    }]
+                })
+    
+                const cartData = await cart.save()
+                const length = cartData.product.length;
                 console.log(length)
-
-                res.json({success : true,cartCount:length})
+               
+                res.json({ success : true, cartCount:length})
             }
         }else{
-            const total = product.price * quantity
-            const cart = new cartdb({
-                userId : req.session.userId,
-                product : [{
-                    productId : productId,
-                    quantity : quantity,
-                    price : product.price,
-                    total : total
-                }]
-            })
-
-            const cartData = await cart.save()
-            const length = cartData.product.length;
-            console.log(length)
-           
-            res.json({ success : true, cartCount:length})
+            console.log("helolo");
+            res.json({login:true})
         }
 
     }catch(error){
