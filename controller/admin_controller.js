@@ -130,7 +130,7 @@ const currentWeekRevenue = await orderdb.aggregate([
             {
                 $group: {
                     _id: null,
-                    earnings: { $sum: "$totalAmount" }
+                    total: { $sum: "$totalAmount" }
                 }
             }
         ]);
@@ -402,7 +402,12 @@ const salesReportload = async (req, res) => {
         const page = parseInt(req.query.page) || 1;
         const totalOrders = await orderdb.countDocuments()
         const totalPage = Math.ceil(totalOrders / SALES_PER_PAGE)
-        const order = await orderdb.find({ status: "delivered" })
+        const order = await orderdb.find({
+            $or: [
+              { status: "delivered" },
+              { status: "placed" }
+            ]
+          })    
             .skip((page - 1) * SALES_PER_PAGE)
             .limit(SALES_PER_PAGE)
             .sort({ createdAt: -1 })
