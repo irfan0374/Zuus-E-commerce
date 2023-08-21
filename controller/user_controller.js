@@ -203,7 +203,7 @@ const signupverify = async (req, res) => {
 const logout = async (req, res) => {
     try {
         req.session.destroy()
-        res.render('login')
+        res.redirect('/login')
     } catch (error) {
         res.redirect("/error");
         console.log(error.message);
