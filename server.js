@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require('dotenv').config()
 const express = require('express')
 const session = require("express-session")
@@ -7,6 +8,21 @@ mongoose.connect(process.env.MONGO_URL).then((data) => console.log("Connected Mo
 
 const app = express();
 const cartCount = require('./middleware/cartcount')
+=======
+
+const express = require( 'express')
+const session=require("express-session")
+require('dotenv').config()
+const mongoose=require("mongoose");
+// mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
+mongoose.connect(process.env.MONGO_URL).then((data) => console.log("Connected MongoDb")).catch((err) => console.log(err))
+
+
+
+const app=express();
+
+const cartCount=require('./middleware/cartcount')
+>>>>>>> 0bb788660fc170b6590cfe25469a19266d71a231
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
   next();
@@ -14,10 +30,17 @@ app.use((req, res, next) => {
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(session({
+<<<<<<< HEAD
   secret: "secretKey",
   resave: false,
   saveUninitialized: false,
 }));
+=======
+    secret: "SECRETKEY", 
+    resave: false,              
+    saveUninitialized: false,   
+  }));
+>>>>>>> 0bb788660fc170b6590cfe25469a19266d71a231
 app.use(cartCount.cartcount)
 
 app.set('view engine', 'ejs');
@@ -39,6 +62,12 @@ app.use((req, res) => {
 })
 
 
+<<<<<<< HEAD
 app.listen(4000, () => {
   console.log('running sucessfull');
 }) 
+=======
+app.listen(4000 , () => {
+    console.log('running sucessfull');
+}) 
+>>>>>>> 0bb788660fc170b6590cfe25469a19266d71a231
