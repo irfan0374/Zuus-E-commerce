@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 app.use( express.json())
 app.use( express.urlencoded({extended : false}))
 app.use(session({
-    secret: process.env.secret, 
+    secret: "SECRETKEY", 
     resave: false,              
     saveUninitialized: false,   
   }));
