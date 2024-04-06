@@ -1,15 +1,15 @@
-const mongoose=require("mongoose");
-// mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
-mongoose.connect("mongodb+srv://zuus:xOocmS8ag8Qevvjf@cluster0.czkonjb.mongodb.net/e-commerce").then((data) => console.log("Connected MongoDb")).catch((err) => console.log(err))
-
-
-
 
 const express = require( 'express')
 const session=require("express-session")
-const dotenv=require('dotenv').config()
+require('dotenv').config()
+const mongoose=require("mongoose");
+// mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
+mongoose.connect(process.env.MONGO_URL).then((data) => console.log("Connected MongoDb")).catch((err) => console.log(err))
+
+
 
 const app=express();
+
 const cartCount=require('./middleware/cartcount')
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
