@@ -4,6 +4,7 @@ const express = require('express')
 const session = require("express-session")
 const mongoose = require("mongoose");
 const job=require('./cnofig/cron')
+const nocache = require("nocache");
 // mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
 mongoose.connect(process.env.MONGO_URL).then(() => console.log("Connected MongoDb")).catch((err) => console.log("error!! failed to connect database"))
 
