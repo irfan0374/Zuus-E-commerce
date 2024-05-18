@@ -7,7 +7,7 @@ const productcontroller=require('../controller/Product_Controller')
 const couponController=require('../controller/Coupon_Controller')
 const bannerController=require('../controller/Banner_Controller')
 const adminAuth = require('../middleware/Admin_auth')
-const image = require('../Config/Multer')
+const image = require('../Config/multer')
 
 
 rout.set('view engine','ejs');

@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const session = require("express-session")
 const mongoose = require("mongoose");
-// const job=require('./Config/Cron')
+
 const job=require('./Config/cron')
 const nocache = require("nocache");
 // mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
