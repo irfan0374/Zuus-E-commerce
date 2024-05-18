@@ -6,7 +6,7 @@ const admincontroller=require("../controller/adminController");
 const productcontroller=require('../controller/productController')
 const couponController=require('../controller/couponController')
 const bannerController=require('../controller/bannerController')
-const adminAuth = require('../middleware/adminAuth')
+const adminAuth = require('../middleware/Admin_auth')
 const image = require('../Config/multer')
 
 

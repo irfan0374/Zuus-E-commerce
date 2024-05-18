@@ -32,10 +32,10 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'))
 
 
-const userroute = require('./route/userRoute')
+const userroute = require('./route/User_route')
 app.use('/', userroute)
 
-const adminroute = require('./route/adminRoute')
+const adminroute = require('./route/Admin_route')
 app.use('/admin', adminroute)
 
 app.use(nocache());

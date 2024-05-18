@@ -9,7 +9,7 @@ const userController = require("../controller/userController")
 const productController = require("../controller/productController")
 const cartController = require('../controller/cartController')
 const checkoutController = require('../controller/checkoutController')
-const userAuth = require('../middleware/userAuth')
+const userAuth = require('../middleware/User_auth')
 const couponController = require('../controller/couponController')
 const wishlistController = require('../controller/wishlistController')
 
