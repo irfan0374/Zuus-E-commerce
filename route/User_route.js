@@ -5,13 +5,13 @@ const userroute = express()
 userroute.set("view engine", "ejs")
 userroute.set("views", "./views/user");
 // Controller
-const userController = require("../controller/userController")
-const productController = require("../controller/productController")
-const cartController = require('../controller/cartController')
-const checkoutController = require('../controller/checkoutController')
+const userController = require("../controller/User_Controller")
+const productController = require("../controller/Product_Controller")
+const cartController = require('../controller/Cart_Controller')
+const checkoutController = require('../controller/Checkout_Controller')
 const userAuth = require('../middleware/User_auth')
-const couponController = require('../controller/couponController')
-const wishlistController = require('../controller/wishlistController')
+const couponController = require('../controller/Coupon_Controller')
+const wishlistController = require('../controller/Wishlist_Controller')
 
 // 404error
 userroute.get('/error', userController.error)
