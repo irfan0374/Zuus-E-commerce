@@ -10,7 +10,9 @@ mongoose.connect(process.env.MONGO_URL).then(() => console.log("Connected MongoD
 
 const app = express();
 
-const cartCount = require('./middleware/cartCount')
+
+
+const {cartcount}=require('./middleware/cartCount')
 
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
@@ -24,7 +26,7 @@ app.use(session({
   saveUninitialized: false,
 }));
 
-app.use(cartCount.cartcount)
+app.use(cartcount)
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'))
