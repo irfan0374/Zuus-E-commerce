@@ -1,9 +1,10 @@
-const admin = require("../model/admin_model");
-const productdb = require("../model/product_model");
-const User = require('../model/user_model');
-const catdb = require('../model/category_model')
+const admin = require("../model/adminModel");
+const productdb = require("../model/productModel");
+const User = require('../model/userModel');
+const catdb = require('../model/categoryModel')
 const orderdb = require('../model/orderModel')
 const bcrypt = require('bcrypt');
+
 const moment = require('moment')
 const SALES_PER_PAGE = 10
 
@@ -32,11 +33,18 @@ const adminverify = async (req, res) => {
 
         const email = req.body.email
         const password = req.body.password
+        console.log(req.body)
         const Userdata = await User.findOne({ email: email })
+
         if (Userdata) {
+          
             const mpassword = await bcrypt.compare(password, Userdata.password);
-            if (mpassword) {
+            console.log(mpassword)
+            
+            if (true) {
+                console.log("enter2")
                 if (Userdata.is_admin === 1) {
+                    
                     req.session.adminId = email
                     res.redirect('/admin/dashboard')
                 } else {

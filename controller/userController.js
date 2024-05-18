@@ -1,10 +1,10 @@
-const User = require("../model/user_model");
+const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const productdb = require('../model/product_model')
-const addressDb = require('../model/address_model')
+const productdb = require('../model/productModel')
+const addressDb = require('../model/addressModel')
 const orderDB = require('../model/orderModel')
-const bannerDb = require('../model/banner_model')
+const bannerDb = require('../model/bannerModel')
 require('dotenv').config();
 
 let otp;
@@ -121,7 +121,9 @@ const verifylogin = async (req, res) => {
                     const passwordMatch = await bcrypt.compare(
                         password, userData.password
                     );
+                    console.log(passwordMatch)
                     if (passwordMatch) {
+                        console.log("hello password")
                         req.session.userId = userData._id;
                         res.redirect("/home");
                     } else {

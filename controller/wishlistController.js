@@ -1,7 +1,7 @@
-const productDb=require('../model/product_model')
+const productDb=require('../model/productModel')
 const wishlistDb=require('../model/wishlistModel')
-const userDb=require('../model/user_model')
-const cartDb=require('../model/cart_model')
+const userDb=require('../model/userModel')
+const cartDb=require('../model/cartModel')
 
 const wishlistLoad=async(req,res)=>{
     try{

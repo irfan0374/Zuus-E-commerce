@@ -1,6 +1,6 @@
-const coupondb = require('../model/coupon_model')
-const userdb=require('../model/user_model')
-const cartDb=require('../model/cart_model')
+const coupondb = require('../model/couponModel')
+const userdb=require('../model/userModel')
+const cartDb=require('../model/cartModel')
 
 const couponLoad = async (req, res) => {
     try {

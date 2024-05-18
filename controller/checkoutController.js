@@ -1,8 +1,8 @@
-const addressdb = require('../model/address_model')
-const userdb = require('../model/user_model')
-const cartdb = require('../model/cart_model')
+const addressdb = require('../model/addressModel')
+const userdb = require('../model/userModel')
+const cartdb = require('../model/cartModel')
 const Orderdb = require('../model/orderModel')
-const productdb = require('../model/product_model')
+const productdb = require('../model/productModel')
 const razorpay = require('razorpay');
 
 var instance = new razorpay({

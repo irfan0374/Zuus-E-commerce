@@ -1,4 +1,4 @@
-const bannerModel = require('../model/banner_model')
+const bannerModel = require('../model/bannerModel')
 
 const banner_per_page = 5;
 

@@ -1,6 +1,6 @@
-const User = require('../model/user_model');
-const catdb = require('../model/category_model')
-const productdb = require('../model/product_model')
+const User = require('../model/userModel');
+const catdb = require('../model/categoryModel')
+const productdb = require('../model/productModel')
 
 
 const productlist = async (req, res) => {

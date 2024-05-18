@@ -2,12 +2,12 @@ const express=require('express');
 const rout=express();
 const path=require('path');
 const multer=require('multer');
-const admincontroller=require("../controller/admin_controller");
-const productcontroller=require('../controller/product_controller')
+const admincontroller=require("../controller/adminController");
+const productcontroller=require('../controller/productController')
 const couponController=require('../controller/couponController')
 const bannerController=require('../controller/bannerController')
 const adminAuth = require('../middleware/adminAuth')
-const image = require('../cnofig/multer')
+const image = require('../Config/multer')
 
 
 rout.set('view engine','ejs');

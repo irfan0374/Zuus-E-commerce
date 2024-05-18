@@ -1,4 +1,4 @@
-const cartdb = require('../model/cart_model')
+const cartdb = require('../model/cartModel')
 
 const cartcount = async (req, res, next) => {
     try {

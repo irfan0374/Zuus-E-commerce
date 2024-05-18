@@ -1,8 +1,8 @@
-const User=require('../model/user_model')
-const cartdb=require('../model/cart_model')
-const productdb = require('../model/product_model')
-const addressDb=require('../model/address_model')
-const coupondb=require('../model/coupon_model')
+const User=require('../model/userModel')
+const cartdb=require('../model/cartModel')
+const productdb = require('../model/productModel')
+const addressDb=require('../model/addressModel')
+const coupondb=require('../model/couponModel')
 
 const cartload=async (req,res)=>{
     try{
