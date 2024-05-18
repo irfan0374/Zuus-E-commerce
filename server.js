@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const session = require("express-session")
 const mongoose = require("mongoose");
+// const job=require('./Config/Cron')
 const job=require('./Config/Cron')
 const nocache = require("nocache");
 // mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
@@ -52,4 +53,11 @@ app.use((req, res) => {
 app.listen(4000, () => {
   console.log('running sucessfull');
 }) 
+app.use((req, res, next) => {
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+  res.header("Expires", "-1");
+  res.header("Pragma", "no-cache");
+  next();
+});
+
 
