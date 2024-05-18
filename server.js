@@ -12,7 +12,7 @@ const app = express();
 
 
 
-const {cartcount}=require('./middleware/cartCount')
+const {cartcount}=require('./middleware/Cart_count')
 
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
