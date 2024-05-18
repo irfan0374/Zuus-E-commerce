@@ -121,9 +121,9 @@ const verifylogin = async (req, res) => {
                     const passwordMatch = await bcrypt.compare(
                         password, userData.password
                     );
-                    console.log(passwordMatch)
+                    
                     if (passwordMatch) {
-                        console.log("hello password")
+                     
                         req.session.userId = userData._id;
                         res.redirect("/home");
                     } else {
